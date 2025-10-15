@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portable PaaS Deployments with Azure Container Apps - SLA & API Conf 2025</title>
+
+    <!-- Reveal.js core -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/white.css">
+
+    <style>
+/* Session header with slide number */
+.reveal .slide-number::before {
+    content: "Portable PaaS • ";
+    color: #3498db;
+    font-weight: 600;
+}
+
+.reveal .slide-number {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 18px;
+    color: #2c3e50;
+    background: transparent;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reveal .slide-number:hover {
+    color: #3498db;
+    transform: scale(1.1);
+}
+
+/* Navigation menu */
+.nav-menu {
+    position: fixed;
+    top: 60px;
+    right: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: none;
+    z-index: 99;
+    min-width: 200px;
+}
+
+.nav-menu.active {
+    display: block;
+}
+
+.nav-menu-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.nav-menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-menu-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-menu-btn:hover {
+    background: #2980b9;
+    transform: translateX(3px);
+}
+
+.nav-menu-btn.secondary {
+    background: #95a5a6;
+}
+
+.nav-menu-btn.secondary:hover {
+    background: #7f8c8d;
+}
+
+.nav-menu-input {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ecf0f1;
+}
+
+.nav-menu-input input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid #ecf0f1;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.nav-menu-input input:focus {
+    border-color: #3498db;
+}
+
+.nav-menu-input button {
+    padding: 8px 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-menu-input button:hover {
+    background: #2980b9;
+}
+
+/* Base typography */
+.reveal {
+    font-size: 36px;
+}
+
+.reveal h1 {
+    font-size: 3em;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.reveal h2 {
+    font-size: 2em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1em;
+}
+
+.reveal h3 {
+    font-size: 1.5em;
+    font-weight: 500;
+    color: #34495e;
+}
+
+/* Text emphasis */
+.emphasis {
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* Quote styles */
+.big-quote {
+    font-size: 2.5em;
+    font-weight: 300;
+    line-height: 1.4;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.quote-slide {
+    font-size: 2em;
+    font-style: italic;
+    line-height: 1.5;
+    color: #34495e;
+    text-align: center;
+}
+
+/* Comparison boxes */
+.comparison {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    margin: 2em 0;
+}
+
+.comparison > div {
+    flex: 1;
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.before {
+    background: #fff5f5;
+    border: 2px solid #e74c3c;
+}
+
+.after {
+    background: #f0f9ff;
+    border: 2px solid #3498db;
+}
+
+/* Utility classes */
+.small-text {
+    font-size: 0.8em;
+    color: #7f8c8d;
+}
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- SECTION 1: Opening (3 slides) -->
+
+            <!-- Slide 1: Title -->
+            <section>
+                <h1 style="font-size: 2.2em; line-height: 1.3;">Portable PaaS Deployments with Azure Container Apps</h1>
+                <h3 style="margin-top: 1.5em; color: #7f8c8d; font-weight: 400;">YAML Patterns for Cloud-to-Edge Portability</h3>
+                <p style="margin-top: 3em; font-size: 0.7em; color: #95a5a6;">
+                    SLA & API Conference 2025 • Berlin
+                </p>
+            </section>
+
+            <!-- Slide 2: Opening Hook (Validate ACA) -->
+            <section>
+                <p class="big-quote" style="font-size: 2em; line-height: 1.5;">
+                    "Who here uses or is evaluating<br>
+                    <span class="emphasis">Azure Container Apps</span>?"
+                </p>
+                <p style="margin-top: 3em; font-size: 1em; color: #95a5a6; font-style: italic;">
+                    [pause for show of hands]
+                </p>
+                <p class="fragment" style="margin-top: 2em; font-size: 1.3em; color: #27ae60;">
+                    Great. ACA is <span class="emphasis">genuinely attractive</span>—<br>
+                    serverless, simple, fast.
+                </p>
+                <aside class="notes">
+                    - Ask for show of hands<br>
+                    - Acknowledge: "Great, ACA is genuinely attractive"<br>
+                    - Validate their choice, don't judge<br>
+                    - Set tone: we're here to help, not lecture
+                </aside>
+            </section>
+
+            <!-- Slide 3: The "What If" -->
+            <section>
+                <p class="big-quote" style="font-size: 1.8em; line-height: 1.5;">
+                    But what if...<br>
+                    <span class="emphasis">requirements change?</span>
+                </p>
+                <p style="margin-top: 2em; font-size: 1.2em; color: #7f8c8d; text-align: center;">
+                    Compliance. Multi-cloud. Edge deployment.<br>
+                    <strong>Can you move your ACA workloads?</strong>
+                </p>
+                <p style="margin-top: 2em; font-size: 1em; color: #2c3e50; text-align: center;">
+                    Today: how to <strong>use ACA safely</strong>—with an escape hatch ready
+                </p>
+            </section>
+
+            <!-- SECTION 2: Demo 1 Setup (2 slides) -->
+
+            <!-- Slide 4: Why Teams Choose ACA -->
+            <section>
+                <h2>Why Teams Choose ACA</h2>
+                <div style="margin: 2em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">Serverless</span>—scale to zero, pay for what you use</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">Simple</span>—no K8s expertise required</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">Fast</span>—deploy in minutes with clean YAML</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">Integrated</span>—DAPR, managed certs, auto-scaling built-in</p>
+                </div>
+                <p style="text-align: center; margin-top: 2em; font-style: italic; color: #27ae60; font-size: 1em;">
+                    <strong>These are legitimate reasons</strong>
+                </p>
+            </section>
+
+            <!-- Slide 5: Demo 1 Context -->
+            <section>
+                <h2>Demo 1: ACA in Action</h2>
+                <p style="font-size: 1.2em; margin-top: 2em; color: #7f8c8d; text-align: center;">
+                    Let's see how easy deployment actually is
+                </p>
+                <p style="font-size: 0.9em; margin-top: 3em; color: #95a5a6; text-align: center;">
+                    → Switch to terminal / Azure Portal
+                </p>
+                <aside class="notes">
+                    - Show clean YAML file<br>
+                    - Deploy with az containerapp create --yaml<br>
+                    - Point out: no K8s knowledge needed, DAPR, scale-to-zero<br>
+                    - PAUSE: "This is the promise working. Now the problem..."
+                </aside>
+            </section>
+
+            <!-- SECTION 3: The Migration Scenario (4 slides) -->
+
+            <!-- Slide 6: 3 Months Later -->
+            <section>
+                <p class="big-quote" style="font-size: 2em;">
+                    3 months later...
+                </p>
+                <p class="fragment" style="margin-top: 2em; font-size: 1.3em; color: #2c3e50; text-align: center;">
+                    "We need to deploy on-premises<br>for compliance reasons."
+                </p>
+                <p class="fragment" style="margin-top: 2em; font-size: 1em; color: #e74c3c; text-align: center; font-style: italic;">
+                    Now what?
+                </p>
+                <aside class="notes">
+                    - Real scenario: compliance requirement emerges (GDPR, data sovereignty)<br>
+                    - Could be multi-cloud, edge deployment, cost optimization<br>
+                    - PAUSE 2 seconds: let tension land<br>
+                    - "This is when the lock-in becomes visible"
+                </aside>
+            </section>
+
+            <!-- Slide 7: YAML Incompatibility -->
+            <section>
+                <h2>The Migration Challenge</h2>
+                <div class="comparison" style="margin-top: 2em;">
+                    <div class="before" style="text-align: left;">
+                        <h4>What You Have (ACA)</h4>
+                        <pre style="font-size: 0.5em; margin-top: 1em;"><code>kind: ContainerApp
+apiVersion: 2023-05-01
+properties:
+  configuration:
+    ingress:
+      external: true
+  template:
+    containers: [...]</code></pre>
+                    </div>
+                    <div class="after" style="text-align: left;">
+                        <h4>What You Need (K8s)</h4>
+                        <pre style="font-size: 0.5em; margin-top: 1em;"><code>kind: Deployment
+apiVersion: apps/v1
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers: [...]
+---
+kind: Service
+kind: Ingress</code></pre>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 1.5em; color: #e74c3c; font-size: 0.9em;">
+                    <code>kind: ContainerApp</code> ≠ <code>kind: Deployment</code>
+                </p>
+            </section>
+
+            <!-- Slide 8: The Migration Cost -->
+            <section>
+                <h2>The Manual Migration Tax</h2>
+                <div style="margin: 2em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">⏱ Rewrite all manifests: Deployment, Service, Ingress (2-3 days)</p>
+                    <p style="margin: 1.5em 0;">⏱ Understand behavioral differences (DAPR, scaling, networking) (1-2 days)</p>
+                    <p style="margin: 1.5em 0;">⏱ Test on real K8s cluster, debug issues (2-3 days)</p>
+                    <p style="margin: 1.5em 0;">⏱ Update CI/CD pipelines, documentation (1 day)</p>
+                </div>
+                <p style="text-align: center; margin-top: 1.5em; color: #e74c3c; font-size: 1.2em;">
+                    <strong>Total: 1-2 weeks per service</strong>
+                </p>
+                <p style="text-align: center; margin-top: 1em; font-size: 0.9em; color: #7f8c8d; font-style: italic;">
+                    Multiply by dozens of services...
+                </p>
+            </section>
+
+            <!-- Slide 9: We Need an Escape Hatch -->
+            <section>
+                <p class="big-quote" style="font-size: 2.2em;">
+                    We need an<br>
+                    <span class="emphasis">escape hatch</span>
+                </p>
+                <p style="margin-top: 2em; font-size: 1.2em; color: #7f8c8d; text-align: center;">
+                    A way to use ACA today...<br>
+                    but have K8s manifests ready when we need them
+                </p>
+                <aside class="notes">
+                    - Transition from problem to solution<br>
+                    - PAUSE 2 seconds: "So how do we get out?"<br>
+                    - Emphasize: not about avoiding ACA, about having options
+                </aside>
+            </section>
+
+            <!-- SECTION 4: The Escape Hatch Pattern (5 slides) -->
+
+            <!-- Slide 10: Core Pattern -->
+            <section>
+                <p class="quote-slide" style="font-size: 1.8em;">
+                    "Use ACA for its benefits—<br>
+                    but <span class="emphasis">always maintain</span><br>
+                    K8s manifests as your source of truth"
+                </p>
+                <p style="text-align: center; margin-top: 2em; font-size: 1em; color: #7f8c8d; font-style: italic;">
+                    Portability without sacrificing convenience
+                </p>
+            </section>
+
+            <!-- Slide 11: The Bidirectional Approach -->
+            <section>
+                <h2>The Escape Hatch Pattern</h2>
+                <div style="margin: 3em auto; max-width: 1000px;">
+                    <div style="background: #f0f9ff; padding: 2em; border-radius: 12px; border: 2px solid #3498db; margin-bottom: 1.5em;">
+                        <h4 style="color: #3498db; margin: 0;">Azure Container Apps</h4>
+                        <p style="font-size: 0.75em; margin-top: 0.5em; color: #2c3e50;">
+                            What you're using today — serverless, simple, fast
+                        </p>
+                    </div>
+                    <p style="font-size: 2em; text-align: center; margin: 0.5em 0;">⇄</p>
+                    <div style="background: #d5f4e6; padding: 2em; border-radius: 12px; border: 2px solid #27ae60;">
+                        <h4 style="color: #27ae60; margin: 0;">Standard Kubernetes Manifests</h4>
+                        <p style="font-size: 0.75em; margin-top: 0.5em; color: #2c3e50;">
+                            Your escape hatch — portable to any cluster
+                        </p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 1.5em; color: #3498db; font-size: 1em;">
+                    <strong>Bidirectional transformation with AI</strong>
+                </p>
+            </section>
+
+            <!-- Slide 12: K8s as Source of Truth -->
+            <section>
+                <h2>Kubernetes as Source of Truth</h2>
+                <div style="margin: 2em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">Deploy anywhere</span> — AKS, GKE, on-prem, edge clusters</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">No rewrite</span> when requirements change</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">Standard tooling</span> — kubectl, Helm, GitOps</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">Future-proof</span> — not tied to one vendor</p>
+                </div>
+                <p style="text-align: center; margin-top: 2em; font-style: italic; color: #27ae60; font-size: 1em;">
+                    But you can still <strong>use</strong> ACA when it makes sense
+                </p>
+            </section>
+
+            <!-- Slide 13: Two Paths Forward -->
+            <section>
+                <h2>Two Paths, Same Destination</h2>
+                <div class="comparison" style="margin-top: 2em;">
+                    <div class="before" style="background: #fff5f5; border-color: #3498db;">
+                        <h4 style="color: #3498db;">Path 1: Already on ACA</h4>
+                        <p style="font-size: 0.75em; margin-top: 1.5em; line-height: 1.8;">
+                            • Use AI to generate K8s manifests<br>
+                            • Test on any K8s cluster<br>
+                            • Keep both: ACA + K8s source<br>
+                            • <strong>Deploy from K8s when needed</strong>
+                        </p>
+                    </div>
+                    <div class="after">
+                        <h4>Path 2: Starting Fresh</h4>
+                        <p style="font-size: 0.75em; margin-top: 1.5em; line-height: 1.8;">
+                            • Start with K8s manifests<br>
+                            • Use AI to generate ACA YAML<br>
+                            • Deploy to ACA if serverless helps<br>
+                            • <strong>K8s ready from day one</strong>
+                        </p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 1.5em; color: #2c3e50; font-size: 0.9em;">
+                    Both paths give you portability
+                </p>
+            </section>
+
+            <!-- Slide 14: AI as the Bridge -->
+            <section>
+                <h2>AI Makes This Trivial</h2>
+                <div style="margin: 2em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.5em 0;"><span class="emphasis">ACA → K8s</span>: "Generate standard Kubernetes manifests from this ContainerApp"</p>
+                    <p style="margin: 1.5em 0;"><span class="emphasis">K8s → ACA</span>: "Generate Azure Container App YAML from these K8s manifests"</p>
+                    <p style="margin: 1.5em 0;"><span class="emphasis">Time</span>: Minutes, not days</p>
+                </div>
+                <p style="text-align: center; margin-top: 2em; font-style: italic; color: #3498db; font-size: 1em;">
+                    GitHub Copilot, Azure Copilot, ChatGPT — all understand both formats
+                </p>
+                <aside class="notes">
+                    - Before demos, address the elephant in the room<br>
+                    - "You might ask: shouldn't we use a standard?"<br>
+                    - Transition to OAM discussion
+                </aside>
+            </section>
+
+            <!-- SECTION 4.5: What About Standards? (4 slides) -->
+
+            <!-- Slide 14.5: The Standards Question -->
+            <section>
+                <h2>"Shouldn't We Use a Standard?"</h2>
+                <p class="big-quote" style="font-size: 1.6em; margin-top: 1.5em;">
+                    Yes... but which one?
+                </p>
+                <p class="fragment" style="margin-top: 2em; font-size: 1.2em; color: #7f8c8d; text-align: center;">
+                    Open Application Model (OAM) promises<br>
+                    <span class="emphasis">true multi-cloud portability</span>
+                </p>
+                <p class="fragment" style="margin-top: 1.5em; font-size: 1em; color: #e74c3c; text-align: center;">
+                    But meta-languages introduce new problems...
+                </p>
+                <aside class="notes">
+                    - "You might be thinking: shouldn't we use a standard like OAM?"<br>
+                    - Acknowledge OAM is theoretically elegant<br>
+                    - "Let me show you why we recommend AI instead"<br>
+                    - PAUSE 2 seconds
+                </aside>
+            </section>
+
+            <!-- Slide 14.6: OAM Example -->
+            <section>
+                <h2>OAM Approach</h2>
+                <pre style="font-size: 0.5em; margin-top: 1.5em;"><code class="yaml">apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: my-api
+spec:
+  components:
+  - name: api
+    type: webservice
+    properties:
+      image: myimage:v1
+      port: 8080
+    traits:
+    - type: scaler
+      properties:
+        replicas: 3</code></pre>
+                <p style="text-align: center; margin-top: 1.5em; color: #27ae60; font-size: 0.9em;">
+                    ✓ Platform-agnostic, vendor-neutral, separation of concerns
+                </p>
+                <aside class="notes">
+                    - "OAM looks clean: describe WHAT you want, not HOW"<br>
+                    - "Platform-agnostic, vendor-neutral—sounds perfect"<br>
+                    - "But there's a problem..."
+                </aside>
+            </section>
+
+            <!-- Slide 14.7: OAM Problems -->
+            <section>
+                <h2>The Meta-Language Trap</h2>
+                <div style="margin: 2em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">❌ <span class="emphasis">Superset complexity</span>: must support all clouds' features</p>
+                    <p style="margin: 1.5em 0;">❌ <span class="emphasis">Learning curve</span>: new spec to learn, evolving standard</p>
+                    <p style="margin: 1.5em 0;">❌ <span class="emphasis">Tooling immaturity</span>: ACA not natively supported</p>
+                    <p style="margin: 1.5em 0;">❌ <span class="emphasis">Double abstraction</span>: App → OAM → K8s → Container</p>
+                </div>
+                <p style="text-align: center; margin-top: 1.5em; color: #e74c3c; font-size: 1em; font-style: italic;">
+                    You're learning a language to describe another language
+                </p>
+                <aside class="notes">
+                    - Read bullets quickly, emphasize:<br>
+                    - "Superset complexity: OAM must model ALL clouds' features"<br>
+                    - "Learning curve: new spec, evolving (v1alpha2 → v1beta1)"<br>
+                    - "ACA not natively supported—you'd write custom traits anyway"<br>
+                    - Key phrase: "You're learning a language to describe another language"<br>
+                    - PAUSE 2 seconds
+                </aside>
+            </section>
+
+            <!-- Slide 14.8: Why AI Instead -->
+            <section>
+                <h2>Why AI is Better for This Problem</h2>
+                <div style="margin: 2em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">K8s is the standard</span>: everyone already knows it</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">AI does dirty work</span>: generates target-specific YAML when needed</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">Pay-as-you-go</span>: complexity only when you need it</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">Future-proof</span>: AI improves, adapts to new services</p>
+                </div>
+                <p style="text-align: center; margin-top: 1.5em; color: #27ae60; font-size: 1.2em;">
+                    <strong>Pragmatic over purist</strong>
+                </p>
+                <aside class="notes">
+                    - "Our approach: K8s as lingua franca + AI when you need translation"<br>
+                    - Emphasize:<br>
+                    - "K8s is de-facto standard—you learn once, use everywhere"<br>
+                    - "AI handles edge cases, improves over time"<br>
+                    - "Complexity only when you need it (pay-as-you-go)"<br>
+                    - "If OAM doesn't succeed, you haven't bet on wrong tech"<br>
+                    - Key phrase: "Pragmatic over purist"<br>
+                    - Transition: "Let me prove this works—Demo 2..."
+                </aside>
+            </section>
+
+            <!-- SECTION 5: Demo 2: ACA → K8s Migration (3 slides) -->
+
+            <!-- Slide 15: Demo 2 Setup -->
+            <section>
+                <h2>Demo 2: The Escape Hatch in Action</h2>
+                <p style="font-size: 1.3em; margin-top: 2em; color: #2c3e50; text-align: center;">
+                    From ACA ContainerApp<br>
+                    to standard Kubernetes manifests
+                </p>
+                <p style="font-size: 1em; margin-top: 2em; color: #7f8c8d; text-align: center; font-style: italic;">
+                    Using AI to generate our escape route
+                </p>
+                <p style="font-size: 0.9em; margin-top: 3em; color: #95a5a6; text-align: center;">
+                    → Switch to VS Code with Copilot
+                </p>
+                <aside class="notes">
+                    - Start with ACA YAML from Demo 1<br>
+                    - Prompt Copilot: "Generate standard K8s manifests from this ACA ContainerApp"<br>
+                    - Show generated: Deployment, Service, Ingress<br>
+                    - Validate: deploy to K8s cluster (AKS/minikube) → works identically<br>
+                    - PAUSE: "Escape hatch activated in minutes, not weeks"
+                </aside>
+            </section>
+
+            <!-- Slide 16: What Gets Generated -->
+            <section>
+                <h2>AI Generates Complete K8s Stack</h2>
+                <div style="margin: 2em auto; max-width: 1000px; text-align: left;">
+                    <div style="background: #f0f9ff; padding: 1.5em; border-radius: 8px; border-left: 6px solid #3498db; margin-bottom: 1em;">
+                        <h4 style="color: #3498db; margin: 0 0 0.5em 0;">Input: ACA ContainerApp</h4>
+                        <p style="font-size: 0.7em; margin: 0; color: #7f8c8d;">
+                            Single YAML file, Azure-specific properties
+                        </p>
+                    </div>
+                    <p style="text-align: center; font-size: 1.5em; margin: 0.5em 0; color: #27ae60;">↓ AI transforms</p>
+                    <div style="background: #d5f4e6; padding: 1.5em; border-radius: 8px; border-left: 6px solid #27ae60;">
+                        <h4 style="color: #27ae60; margin: 0 0 0.5em 0;">Output: Standard Kubernetes</h4>
+                        <p style="font-size: 0.7em; margin: 0; line-height: 1.6;">
+                            • <strong>Deployment</strong>: replicas, containers, probes, resources<br>
+                            • <strong>Service</strong>: ClusterIP, port mappings<br>
+                            • <strong>Ingress</strong>: routing rules, TLS configuration<br>
+                            • <strong>Preserves</strong>: all container logic, env vars, volumes
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 17: Deploy Anywhere -->
+            <section>
+                <h2>Now Deploy to Any K8s Cluster</h2>
+                <div style="margin: 2em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">AKS</span> (Azure Kubernetes Service)</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">GKE</span> (Google Kubernetes Engine)</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">EKS</span> (Amazon Elastic Kubernetes Service)</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">On-prem</span> K8s clusters (compliance, edge)</p>
+                    <p style="margin: 1.5em 0;">✓ <span class="emphasis">Minikube / Kind</span> (local development)</p>
+                </div>
+                <p style="text-align: center; margin-top: 2em; color: #27ae60; font-size: 1.2em;">
+                    <strong>Same manifests, any cluster</strong>
+                </p>
+                <p style="text-align: center; margin-top: 1em; font-size: 0.9em; color: #7f8c8d; font-style: italic;">
+                    No changes to application logic required
+                </p>
+            </section>
+
+            <!-- SECTION 6: Demo 3: K8s → ACA Round-Trip (2 slides) -->
+
+            <!-- Slide 18: Demo 3 Setup -->
+            <section>
+                <h2>Demo 3: The Round-Trip</h2>
+                <p style="font-size: 1.3em; margin-top: 2em; color: #2c3e50; text-align: center;">
+                    From Kubernetes manifests<br>
+                    back to Azure Container Apps
+                </p>
+                <p style="font-size: 1em; margin-top: 2em; color: #7f8c8d; text-align: center; font-style: italic;">
+                    Proving bidirectional transformation works
+                </p>
+                <p style="font-size: 0.9em; margin-top: 3em; color: #95a5a6; text-align: center;">
+                    → Switch to VS Code with Copilot
+                </p>
+                <aside class="notes">
+                    - Take K8s manifests from Demo 2<br>
+                    - Prompt Copilot: "Generate ACA YAML from these K8s manifests"<br>
+                    - Show round-trip works: K8s ⇄ ACA bidirectional<br>
+                    - Emphasize: "Keep K8s as source of truth, generate ACA when needed"<br>
+                    - PAUSE: "This is how you use ACA without lock-in"
+                </aside>
+            </section>
+
+            <!-- Slide 19: The Source of Truth Pattern -->
+            <section>
+                <h2>Keep K8s as Your Source of Truth</h2>
+                <div style="margin: 2em auto; max-width: 1000px;">
+                    <div style="background: #d5f4e6; padding: 2em; border-radius: 12px; border: 2px solid #27ae60; margin-bottom: 1.5em; text-align: center;">
+                        <h4 style="color: #27ae60; margin: 0 0 0.5em 0;">✓ Source: Kubernetes Manifests</h4>
+                        <p style="font-size: 0.8em; margin: 0; color: #2c3e50;">
+                            Portable, standard, future-proof
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 2em; justify-content: center;">
+                        <div style="background: #f0f9ff; padding: 1.5em; border-radius: 8px; border: 2px solid #3498db; flex: 1; text-align: center;">
+                            <h4 style="color: #3498db; margin: 0 0 0.5em 0; font-size: 0.9em;">Deploy to ACA</h4>
+                            <p style="font-size: 0.7em; margin: 0; color: #7f8c8d;">
+                                AI generates when needed
+                            </p>
+                        </div>
+                        <div style="background: #d5f4e6; padding: 1.5em; border-radius: 8px; border: 2px solid #27ae60; flex: 1; text-align: center;">
+                            <h4 style="color: #27ae60; margin: 0 0 0.5em 0; font-size: 0.9em;">Deploy to K8s</h4>
+                            <p style="font-size: 0.7em; margin: 0; color: #7f8c8d;">
+                                Use source directly
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 2em; color: #2c3e50; font-size: 1em;">
+                    <strong>One source, multiple deployment options</strong>
+                </p>
+            </section>
+
+            <!-- SECTION 7: How to Use ACA Safely (4 slides) -->
+
+            <!-- Slide 20: Decision Matrix -->
+            <section>
+                <h2>When to Use ACA, When to Migrate</h2>
+                <table style="font-size: 0.55em; margin-top: 1.5em; width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #ecf0f1;">
+                            <th style="padding: 1em; text-align: left; border: 1px solid #bdc3c7;">Scenario</th>
+                            <th style="padding: 1em; text-align: center; border: 1px solid #bdc3c7;">Strategy</th>
+                            <th style="padding: 1em; text-align: center; border: 1px solid #bdc3c7;">Why</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;"><strong>Dev/staging environments</strong></td>
+                            <td style="padding: 1em; text-align: center; border: 1px solid #bdc3c7; background: #f0f9ff;">✅ Use ACA</td>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;">Scale-to-zero saves costs, rapid iteration</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;"><strong>Simple stateless APIs</strong></td>
+                            <td style="padding: 1em; text-align: center; border: 1px solid #bdc3c7; background: #f0f9ff;">✅ Use ACA</td>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;">Serverless fits perfectly, less overhead</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;"><strong>Compliance / data sovereignty</strong></td>
+                            <td style="padding: 1em; text-align: center; border: 1px solid #bdc3c7; background: #d5f4e6;">🚀 Migrate to K8s</td>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;">Deploy on-prem or edge clusters as needed</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;"><strong>Multi-cloud strategy</strong></td>
+                            <td style="padding: 1em; text-align: center; border: 1px solid #bdc3c7; background: #d5f4e6;">🚀 Migrate to K8s</td>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;">Run on Azure (AKS), AWS (EKS), GCP (GKE)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;"><strong>Complex networking / control</strong></td>
+                            <td style="padding: 1em; text-align: center; border: 1px solid #bdc3c7; background: #d5f4e6;">🚀 Migrate to K8s</td>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;">Full control plane, custom policies, advanced features</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;"><strong>True multi-cloud from day one</strong></td>
+                            <td style="padding: 1em; text-align: center; border: 1px solid #bdc3c7; background: #fff3cd;">🤔 Consider OAM</td>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;">If deploying to AWS, GCP, Azure simultaneously—but expect complexity</td>
+                        </tr>
+                        <tr style="background: #f0f9ff;">
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;"><strong>Azure-first with portability</strong></td>
+                            <td style="padding: 1em; text-align: center; border: 1px solid #bdc3c7; background: #d5f4e6;">✅ K8s + AI</td>
+                            <td style="padding: 1em; border: 1px solid #bdc3c7;">Start with ACA/AKS, maintain K8s manifests, AI when you need to escape</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="text-align: center; margin-top: 1.5em; color: #27ae60; font-size: 1em;">
+                    <strong>Recommended:</strong> K8s + AI for Azure-first with escape hatch
+                </p>
+            </section>
+
+            <!-- Slide 21: Real Recovery Journey -->
+            <section>
+                <h2>Real-World Recovery Journey</h2>
+                <div style="margin: 2em auto; max-width: 1000px;">
+                    <div style="background: #f0f9ff; padding: 1.5em; border-radius: 12px; border-left: 6px solid #3498db; margin-bottom: 1em; text-align: left;">
+                        <h4 style="color: #3498db; margin: 0 0 0.5em 0;">Month 1-3: Adopt ACA</h4>
+                        <p style="font-size: 0.8em; margin: 0; color: #2c3e50;">Fast deployment, serverless benefits, team velocity increases</p>
+                    </div>
+                    <div style="background: #fff5f5; padding: 1.5em; border-radius: 12px; border-left: 6px solid #e74c3c; margin-bottom: 1em; text-align: left;">
+                        <h4 style="color: #e74c3c; margin: 0 0 0.5em 0;">Month 4: Hit Wall</h4>
+                        <p style="font-size: 0.8em; margin: 0; color: #2c3e50;">New compliance requirement: must deploy on-premises</p>
+                    </div>
+                    <div style="background: #d5f4e6; padding: 1.5em; border-radius: 12px; border-left: 6px solid #27ae60; text-align: left;">
+                        <h4 style="color: #27ae60; margin: 0 0 0.5em 0;">Week 1-2: Escape</h4>
+                        <p style="font-size: 0.8em; margin: 0; color: #2c3e50;">Use AI to generate K8s manifests, deploy to on-prem cluster, back in business</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 2em; color: #27ae60; font-size: 1em;">
+                    <strong>Recovery time: 1-2 weeks</strong> (vs months of manual rewrite)
+                </p>
+            </section>
+
+            <!-- Slide 22: Call to Action (Split Paths) -->
+            <section>
+                <h2>Your Next Steps (Within 2 Weeks)</h2>
+                <div style="margin: 2em auto; max-width: 1100px;">
+                    <div style="background: #f0f9ff; padding: 1.5em; border-radius: 8px; border: 2px solid #3498db; margin-bottom: 1.5em; text-align: left;">
+                        <h4 style="color: #3498db; margin: 0 0 0.5em 0;">If You're Already on ACA:</h4>
+                        <p style="font-size: 0.75em; margin: 0; line-height: 1.8;">
+                            1. Pick one service (simplest first)<br>
+                            2. Use AI: "Generate K8s manifests from this ContainerApp"<br>
+                            3. Test on any K8s cluster (minikube, AKS, etc.)<br>
+                            4. <strong>Going forward</strong>: edit K8s manifests, generate ACA when deploying to Azure<br>
+                            5. Validate bidirectional transformation works both ways
+                        </p>
+                    </div>
+                    <div style="background: #d5f4e6; padding: 1.5em; border-radius: 8px; border: 2px solid #27ae60; text-align: left;">
+                        <h4 style="color: #27ae60; margin: 0 0 0.5em 0;">If You're Starting Fresh:</h4>
+                        <p style="font-size: 0.75em; margin: 0; line-height: 1.8;">
+                            1. Create K8s manifests first (Deployment, Service, Ingress)<br>
+                            2. Use AI: "Generate ACA YAML from these K8s manifests"<br>
+                            3. Deploy to ACA if serverless makes sense<br>
+                            4. Test: deploy same K8s source to any cluster<br>
+                            5. Keep K8s as source of truth going forward
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 23: Resources -->
+            <section>
+                <h2>Resources & Follow-Up</h2>
+                <div style="margin: 2em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">📦 <span class="emphasis">GitHub repo</span>: Bidirectional examples (ACA ⇄ K8s)</p>
+                    <p style="margin: 1.5em 0;">📊 <span class="emphasis">Decision matrix</span>: When to adopt ACA, when to escape</p>
+                    <p style="margin: 1.5em 0;">🤖 <span class="emphasis">AI prompt templates</span>: ACA→K8s recovery + K8s→ACA generation</p>
+                    <p style="margin: 1.5em 0;">📄 <span class="emphasis">Slide deck</span>: PDF with speaker notes</p>
+                </div>
+                <p style="text-align: center; margin-top: 2em; font-size: 0.8em; color: #7f8c8d;">
+                    Links and QR code: [Add your URLs here]
+                </p>
+            </section>
+
+            <!-- Slide 24: Thank You / Q&A -->
+            <section>
+                <h1 style="font-size: 2.5em; margin-bottom: 0.5em;">Questions?</h1>
+                <p style="font-size: 1.2em; color: #7f8c8d; margin-top: 2em;">
+                    Let's discuss your specific deployment challenges
+                </p>
+                <div style="margin-top: 4em; font-size: 0.8em; color: #95a5a6;">
+                    <p>Contact: [Your email/LinkedIn]</p>
+                    <p>Slides: [Your URL]</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Quick navigation menu -->
+    <div class="nav-menu" id="navMenu">
+        <div class="nav-menu-title">Quick Navigation</div>
+        <div class="nav-menu-actions">
+            <button class="nav-menu-btn" onclick="goToSlide('first')">⏮ First Slide</button>
+            <button class="nav-menu-btn" onclick="goToSlide('last')">⏭ Last Slide</button>
+            <button class="nav-menu-btn secondary" onclick="toggleOverview()">📋 Overview</button>
+        </div>
+        <div class="nav-menu-input">
+            <input type="number" id="slideInput" placeholder="Slide #" min="1" max="28" onkeypress="if(event.key==='Enter') goToSlideNumber()">
+            <button onclick="goToSlideNumber()">Go</button>
+        </div>
+    </div>
+
+    <!-- Reveal.js scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+
+    <script>
+        // Initialize Reveal
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            controls: true,
+            progress: true,
+            center: true,
+            transition: 'slide',
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+
+        // Navigation menu functions
+        function initializeNavMenu() {
+            const slideNumber = document.querySelector('.slide-number');
+            const navMenu = document.getElementById('navMenu');
+
+            // Toggle menu on slide number click
+            if (slideNumber) {
+                slideNumber.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navMenu.classList.toggle('active');
+                });
+            }
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!navMenu.contains(e.target) && !e.target.closest('.slide-number')) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        }
+
+        function goToSlide(position) {
+            if (position === 'first') {
+                Reveal.slide(0);
+            } else if (position === 'last') {
+                const lastSlide = Reveal.getTotalSlides() - 1;
+                Reveal.slide(lastSlide);
+            }
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        function toggleOverview() {
+            Reveal.toggleOverview();
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        function goToSlideNumber() {
+            const input = document.getElementById('slideInput');
+            const slideNum = parseInt(input.value) - 1; // Convert to 0-based index
+            if (slideNum >= 0 && slideNum < Reveal.getTotalSlides()) {
+                Reveal.slide(slideNum);
+                input.value = '';
+            }
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        // Initialize on load
+        Reveal.on('ready', initializeNavMenu);
+    </script>
+</body>
+</html>

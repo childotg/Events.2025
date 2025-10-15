@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk Template - Reveal.js</title>
+
+    <!-- Reveal.js core -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/white.css">
+
+    <style>
+/* Session header with slide number */
+.reveal .slide-number::before {
+    content: "Your Session • ";
+    color: #3498db;
+    font-weight: 600;
+}
+
+.reveal .slide-number {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 18px;
+    color: #2c3e50;
+    background: transparent;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reveal .slide-number:hover {
+    color: #3498db;
+    transform: scale(1.1);
+}
+
+/* Navigation menu */
+.nav-menu {
+    position: fixed;
+    top: 60px;
+    right: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: none;
+    z-index: 99;
+    min-width: 200px;
+}
+
+.nav-menu.active {
+    display: block;
+}
+
+.nav-menu-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.nav-menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-menu-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-menu-btn:hover {
+    background: #2980b9;
+    transform: translateX(3px);
+}
+
+.nav-menu-btn.secondary {
+    background: #95a5a6;
+}
+
+.nav-menu-btn.secondary:hover {
+    background: #7f8c8d;
+}
+
+.nav-menu-input {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ecf0f1;
+}
+
+.nav-menu-input input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid #ecf0f1;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.nav-menu-input input:focus {
+    border-color: #3498db;
+}
+
+.nav-menu-input button {
+    padding: 8px 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-menu-input button:hover {
+    background: #2980b9;
+}
+
+/* Base typography */
+.reveal {
+    font-size: 36px;
+}
+
+.reveal h1 {
+    font-size: 3em;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.reveal h2 {
+    font-size: 2em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1em;
+}
+
+.reveal h3 {
+    font-size: 1.5em;
+    font-weight: 500;
+    color: #34495e;
+}
+
+/* Text emphasis */
+.emphasis {
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* Quote styles */
+.big-quote {
+    font-size: 2.5em;
+    font-weight: 300;
+    line-height: 1.4;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.quote-slide {
+    font-size: 2em;
+    font-style: italic;
+    line-height: 1.5;
+    color: #34495e;
+    text-align: center;
+}
+
+/* Comparison boxes */
+.comparison {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    margin: 2em 0;
+}
+
+.comparison > div {
+    flex: 1;
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.before {
+    background: #fff5f5;
+    border: 2px solid #e74c3c;
+}
+
+.after {
+    background: #f0f9ff;
+    border: 2px solid #3498db;
+}
+
+/* Utility classes */
+.small-text {
+    font-size: 0.8em;
+    color: #7f8c8d;
+}
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title -->
+            <section>
+                <h1>Your Talk Title</h1>
+                <h3 style="margin-top: 1.5em;">Subtitle or Context</h3>
+            </section>
+
+            <!-- Slide 2: Opening Hook (Example 1) -->
+            <section>
+                <p class="big-quote">"What happens when<br>your <span class="emphasis">key assumption</span><br>is challenged?"</p>
+            </section>
+
+            <!-- Slide 3: Content Slide (Example 2) -->
+            <section>
+                <h2>Key Concept</h2>
+                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">→ First important point</p>
+                    <p style="margin: 1.5em 0;">→ Second key insight with <span class="emphasis">emphasis</span></p>
+                    <p style="margin: 1.5em 0;">→ Third supporting detail</p>
+                </div>
+                <p style="text-align: center; margin-top: 2em; font-style: italic; color: #7f8c8d;">
+                    Supporting caption or context
+                </p>
+            </section>
+
+            <!-- Slide 4: Comparison (Example 3) -->
+            <section>
+                <h2>Before vs After</h2>
+                <div class="comparison">
+                    <div class="before">
+                        <h4>Before</h4>
+                        <p style="font-size: 0.75em; margin-top: 1.5em; line-height: 1.8;">
+                            ❌ Old approach<br>
+                            ❌ Previous limitation<br>
+                            ❌ Former challenge
+                        </p>
+                    </div>
+                    <div class="after">
+                        <h4>After</h4>
+                        <p style="font-size: 0.75em; margin-top: 1.5em; line-height: 1.8;">
+                            ✓ <strong>New solution</strong><br>
+                            ✓ <strong>Improved outcome</strong><br>
+                            ✓ <strong>Better result</strong>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Quick navigation menu -->
+    <div class="nav-menu" id="navMenu">
+        <div class="nav-menu-title">Quick Navigation</div>
+        <div class="nav-menu-actions">
+            <button class="nav-menu-btn" onclick="goToSlide('first')">⏮ First Slide</button>
+            <button class="nav-menu-btn" onclick="goToSlide('last')">⏭ Last Slide</button>
+            <button class="nav-menu-btn secondary" onclick="toggleOverview()">📋 Overview</button>
+        </div>
+        <div class="nav-menu-input">
+            <input type="number" id="slideInput" placeholder="Slide #" min="1" max="4" onkeypress="if(event.key==='Enter') goToSlideNumber()">
+            <button onclick="goToSlideNumber()">Go</button>
+        </div>
+    </div>
+
+    <!-- Reveal.js scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+
+    <script>
+        // Initialize Reveal
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            controls: true,
+            progress: true,
+            center: true,
+            transition: 'slide',
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+
+        // Navigation menu functions
+        function initializeNavMenu() {
+            const slideNumber = document.querySelector('.slide-number');
+            const navMenu = document.getElementById('navMenu');
+
+            // Toggle menu on slide number click
+            if (slideNumber) {
+                slideNumber.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navMenu.classList.toggle('active');
+                });
+            }
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!navMenu.contains(e.target) && !e.target.closest('.slide-number')) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        }
+
+        function goToSlide(position) {
+            if (position === 'first') {
+                Reveal.slide(0);
+            } else if (position === 'last') {
+                const lastSlide = Reveal.getTotalSlides() - 1;
+                Reveal.slide(lastSlide);
+            }
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        function toggleOverview() {
+            Reveal.toggleOverview();
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        function goToSlideNumber() {
+            const input = document.getElementById('slideInput');
+            const slideNum = parseInt(input.value) - 1; // Convert to 0-based index
+            if (slideNum >= 0 && slideNum < Reveal.getTotalSlides()) {
+                Reveal.slide(slideNum);
+                input.value = '';
+            }
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        // Initialize on load
+        Reveal.on('ready', initializeNavMenu);
+    </script>
+</body>
+</html>

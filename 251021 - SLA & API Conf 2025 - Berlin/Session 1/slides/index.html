@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 1 - Presentation Template</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/simple.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+:root {
+    --r-background-color: #fafafa;
+    --r-main-color: #2c3e50;
+    --r-heading-color: #1a252f;
+    --r-link-color: #3498db;
+    --r-selection-color: #3498db;
+}
+
+/* Slide header with session name and number */
+.reveal .slide-number {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    bottom: auto;
+    left: auto;
+    font-size: 14px;
+    background: rgba(52, 152, 219, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: #2c3e50;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.reveal .slide-number:hover {
+    background: rgba(52, 152, 219, 0.2);
+    transform: scale(1.05);
+}
+
+.reveal .slide-number::before {
+    content: "Session 1 • ";
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* Quick navigation menu */
+.nav-menu {
+    position: fixed;
+    top: 60px;
+    right: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: none;
+    z-index: 99;
+    min-width: 200px;
+}
+
+.nav-menu.active {
+    display: block;
+    animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-menu-title {
+    font-size: 12px;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.nav-menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-menu-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-menu-btn:hover {
+    background: #2980b9;
+    transform: translateX(3px);
+}
+
+.nav-menu-btn.secondary {
+    background: #95a5a6;
+}
+
+.nav-menu-btn.secondary:hover {
+    background: #7f8c8d;
+}
+
+.nav-menu-input {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ecf0f1;
+}
+
+.nav-menu-input input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid #ecf0f1;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.nav-menu-input input:focus {
+    border-color: #3498db;
+}
+
+.nav-menu-input button {
+    padding: 8px 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-menu-input button:hover {
+    background: #2980b9;
+}
+
+/* Background template support - uncomment and add your image when ready */
+/* .reveal .slides section {
+    background-image: url('your-template-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+} */
+
+.reveal {
+    font-size: 36px;
+}
+
+.reveal h1 {
+    font-size: 2.8em;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+}
+
+.reveal h2 {
+    font-size: 2.2em;
+    font-weight: 500;
+    margin-bottom: 1em;
+    line-height: 1.3;
+}
+
+.reveal h3 {
+    font-size: 1.6em;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.reveal ul {
+    margin: 1.5em 0;
+    list-style: none;
+}
+
+.reveal li {
+    margin: 0.8em 0;
+    padding-left: 1.5em;
+    position: relative;
+}
+
+.reveal li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.diagram {
+    margin: 2em auto;
+    max-width: 800px;
+}
+
+.quote-slide {
+    font-size: 2em;
+    font-style: italic;
+    color: #2c3e50;
+    padding: 2em;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+.big-quote {
+    font-size: 2.5em;
+    font-weight: 300;
+    line-height: 1.4;
+    color: #1a252f;
+}
+
+.emphasis {
+    color: #3498db;
+    font-weight: 600;
+}
+
+.comparison {
+    display: flex;
+    justify-content: space-around;
+    gap: 2em;
+    margin: 2em 0;
+}
+
+.comparison > div {
+    flex: 1;
+    padding: 1.5em;
+    border-radius: 8px;
+}
+
+.before {
+    background: #ffe6e6;
+    border-left: 4px solid #e74c3c;
+}
+
+.after {
+    background: #e6f7ff;
+    border-left: 4px solid #3498db;
+}
+
+.decision-fork {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    margin: 2em 0;
+}
+
+.decision-option {
+    padding: 1.5em 2em;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.decision-option.selected {
+    background: #3498db;
+    color: white;
+    border-color: #2980b9;
+}
+
+.chart-container {
+    position: relative;
+    height: 400px;
+    margin: 2em auto;
+}
+
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    margin: 2em 0;
+    padding: 2em 0;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #3498db;
+}
+
+.timeline-item {
+    position: relative;
+    text-align: center;
+    padding: 1em;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.criteria-matrix {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+    margin: 2em 0;
+}
+
+.criteria-item {
+    padding: 1em;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.criteria-item.fail {
+    background: #ffe6e6;
+    border-color: #e74c3c;
+}
+
+.layered-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin: 2em auto;
+    max-width: 600px;
+}
+
+.layer {
+    padding: 1.5em;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.layer-outer {
+    background: #ecf0f1;
+    border: 2px solid #95a5a6;
+}
+
+.layer-middle {
+    background: #d5dbdb;
+    border: 2px solid #7f8c8d;
+}
+
+.layer-inner {
+    background: #bdc3c7;
+    border: 2px solid #2c3e50;
+}
+
+.silo-diagram {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1em;
+    margin: 2em 0;
+}
+
+.silo {
+    width: 80px;
+    height: 150px;
+    background: #e74c3c;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+}
+
+.platform-circle {
+    width: 200px;
+    height: 200px;
+    background: #3498db;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.fragment {
+    visibility: hidden;
+}
+
+.fragment.visible {
+    visibility: visible;
+}
+
+.small-text {
+    font-size: 0.8em;
+    color: #7f8c8d;
+}
+
+.paths-diagram {
+    display: flex;
+    justify-content: space-around;
+    gap: 2em;
+    margin: 2em 0;
+}
+
+.path {
+    flex: 1;
+    padding: 2em;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.path.wrong {
+    background: #fff5f5;
+    border-color: #e74c3c;
+}
+
+.path.right {
+    background: #f0f9ff;
+    border-color: #3498db;
+}
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title -->
+            <section>
+                <h1>Leading Without Authority</h1>
+                <h3 style="margin-top: 1.5em;">Lessons from a CTO's Journey<br>from Product to Services</h3>
+            </section>
+
+            <!-- Slide 2: Opening Hook -->
+            <section>
+                <p class="big-quote" style="font-size: 2.5em;">"What happens when your impact<br>no longer shows up<br>in the <span class="emphasis">commit log?</span>"</p>
+            </section>
+
+            <!-- Slide 3: Opening Context -->
+            <section>
+                <p class="big-quote">"In the past decade, I've worked in<br>companies that <span class="emphasis">build products</span><br>and companies that <span class="emphasis">sell services.</span>"</p>
+                <p style="text-align: center; margin-top: 3em; font-size: 1.3em; font-style: italic; color: #7f8c8d;">In both, I saw the same pattern</p>
+            </section>
+
+            <!-- Slide 4: The Pattern -->
+            <section>
+                <p class="big-quote">The higher you climb,<br>the further from the code</p>
+                <p style="text-align: center; margin-top: 3em; font-size: 1.3em; font-style: italic; color: #7f8c8d;">Harder to know if influence is <span class="emphasis">real or perceived</span></p>
+            </section>
+
+            <!-- Slide 5: Product vs Services -->
+            <section>
+                <h2>Two Worlds</h2>
+                <div class="comparison">
+                    <div class="before">
+                        <h4>Product Organizations</h4>
+                        <p style="font-size: 0.75em; margin-top: 1.5em; line-height: 1.8;">Shipped features<br>Active users<br>Speed of iteration</p>
+                    </div>
+                    <div class="after">
+                        <h4>Service Organizations</h4>
+                        <p style="font-size: 0.75em; margin-top: 1.5em; line-height: 1.8;">Client trust<br>Process scalability<br>Reputation</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Credibility Currency -->
+            <section>
+                <p class="big-quote">"<span class="emphasis">Credibility</span> is the currency<br>that crosses both worlds."</p>
+            </section>
+
+            <!-- Slide 6: Replicable Trust -->
+            <section>
+                <p class="big-quote">"Technical leadership is about<br><span class="emphasis">replicable trust</span>"</p>
+                <p style="text-align: center; margin-top: 3em; font-size: 1.3em; font-style: italic; color: #7f8c8d;">People seeing what you can do,<br>not just hearing what you say</p>
+            </section>
+
+            <!-- Slide 7: Authority vs Power -->
+            <section>
+                <h2>Authority ≠ Power</h2>
+                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">Authority is often mistaken for power:</p>
+                    <p style="margin: 1.5em 0; color: #7f8c8d;">→ Titles, headcount, budget</p>
+                    <p style="margin: 2.5em 0; margin-top: 3em;">In today's hybrid world, <span class="emphasis">formal power matters less</span><br>than <span class="emphasis">tangible contribution.</span></p>
+                </div>
+            </section>
+
+            <!-- Slide 8: Code Example -->
+            <section>
+                <p class="big-quote">"One line of code that unblocks<br>a cross-functional team<br><br>builds more trust than<br><span class="emphasis">three alignment slides.</span>"</p>
+            </section>
+
+            <!-- Slide 9: Anchoring to Reality -->
+            <section>
+                <p class="quote-slide">"Writing code doesn't reduce your authority—<br><br>it <span class="emphasis">anchors it to reality.</span>"</p>
+            </section>
+
+            <!-- Slide 10: Lesson 1 Title -->
+            <section>
+                <h2>Lesson 1</h2>
+                <h3 style="margin-top: 2em;">Understanding different<br><span class="emphasis">languages of value</span></h3>
+            </section>
+
+            <!-- Slide 11: Languages of Value -->
+            <section>
+                <h2>Different Languages of Value</h2>
+                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">→ <strong>Product work:</strong> value = innovation and speed</p>
+                    <p style="margin: 1.5em 0;">→ <strong>Service work:</strong> value = reliability and client confidence</p>
+                    <p style="margin: 2em 0; padding-top: 1em; border-top: 1px solid #ecf0f1;">→ <strong>Engineers measure:</strong> performance, code elegance</p>
+                    <p style="margin: 1.5em 0;">→ <strong>Business measures:</strong> trust, margins, predictability</p>
+                </div>
+            </section>
+
+            <!-- Slide 12: Translation -->
+            <section>
+                <p class="big-quote">"You don't have to abandon<br>the technical language—<br><br>you have to <span class="emphasis">translate it.</span>"</p>
+            </section>
+
+            <!-- Slide 13: Carl Rogers Quote -->
+            <section>
+                <p class="quote-slide">"Empathy is not agreement;<br>it's <span class="emphasis">understanding.</span>"</p>
+                <p style="text-align: center; margin-top: 2em; color: #7f8c8d; font-size: 0.7em;">— Carl Rogers</p>
+            </section>
+
+            <!-- Slide 14: Building the Bridge -->
+            <section>
+                <h2>Building the Bridge</h2>
+                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">For technologists, empathy isn't asking the business to understand our systems.</p>
+                    <p style="margin: 2em 0; font-size: 1.1em;"><span class="emphasis">It's building the bridge in their language</span><br>—even when they don't speak ours.</p>
+                    <p style="margin: 2em 0; font-style: italic; color: #7f8c8d;">An act of humility, not submission</p>
+                </div>
+            </section>
+
+            <!-- Slide 15: Servant Leadership -->
+            <section>
+                <p class="quote-slide">"Lead by <span class="emphasis">serving</span>,<br>not imposing."</p>
+                <p style="text-align: center; margin-top: 2em; color: #7f8c8d; font-size: 0.7em;">— Robert Greenleaf, Servant Leadership</p>
+            </section>
+
+            <!-- Slide 16: Practical Example -->
+            <section>
+                <h2>Example: Speaking Their Language</h2>
+                <div class="comparison">
+                    <div class="before">
+                        <h4>Technical Message</h4>
+                        <p style="font-size: 0.75em; margin-top: 1.5em; line-height: 1.8;">"We refactored the authentication module for better code maintainability and reduced technical debt"</p>
+                    </div>
+                    <div class="after">
+                        <h4>Business Message</h4>
+                        <p style="font-size: 0.75em; margin-top: 1.5em; line-height: 1.8;">"We cut client onboarding time from 3 days to 4 hours—faster time to sign new contracts"</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 2em; font-size: 1em; font-style: italic; color: #7f8c8d;">Same work, different language</p>
+            </section>
+
+            <!-- Slide 17: Lesson 2 Title -->
+            <section>
+                <h2>Lesson 2</h2>
+                <h3 style="margin-top: 2em;">Staying credible as an<br><span class="emphasis">individual contributor</span></h3>
+            </section>
+
+            <!-- Slide 18: Two Kinds of Power -->
+            <section>
+                <h2>Two Kinds of Power</h2>
+                <div style="display: flex; justify-content: center; gap: 4em; margin: 3em 0;">
+                    <div style="text-align: center;">
+                        <h3 style="margin-bottom: 1em; color: #7f8c8d;">Formal</h3>
+                        <p style="font-size: 0.85em; color: #7f8c8d;">Comes from<br>the title</p>
+                    </div>
+                    <div style="font-size: 3em; color: #3498db;">vs</div>
+                    <div style="text-align: center;">
+                        <h3 style="margin-bottom: 1em; color: #3498db;">Reputational</h3>
+                        <p style="font-size: 0.85em; color: #3498db;">Comes from<br>example</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 3em; font-size: 1.2em; font-style: italic; color: #7f8c8d;">The first is given. The second is earned.</p>
+            </section>
+
+            <!-- Slide 19: Reputation Fades -->
+            <section>
+                <p class="big-quote">"Stop building,<br>and your technical reputation<br><span class="emphasis">fades fast.</span>"</p>
+                <p style="text-align: center; margin-top: 3em; font-size: 1.2em; font-style: italic; color: #7f8c8d;">Technical credibility is a battery—<br>recharge it in the field</p>
+            </section>
+
+            <!-- Slide 20: Suzuki Quote -->
+            <section>
+                <p class="quote-slide">"In the beginner's mind there are many possibilities,<br>but in the expert's there are <span class="emphasis">few.</span>"</p>
+                <p style="text-align: center; margin-top: 2em; color: #7f8c8d; font-size: 0.7em;">— Shunryu Suzuki</p>
+            </section>
+
+            <!-- Slide 21: Humility -->
+            <section>
+                <h2>Humility as a Practice</h2>
+                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">Humility doesn't mean <span style="color: #7f8c8d;">hiding your skill</span>—</p>
+                    <p style="margin: 1.5em 0; font-size: 1.1em;">it means <span class="emphasis">using it to understand others better.</span></p>
+                    <p style="margin: 2.5em 0; padding-top: 1.5em; border-top: 1px solid #ecf0f1;">It's the antidote to technical arrogance:</p>
+                    <p style="margin: 1.5em 0; font-style: italic; color: #3498db;">Not having the last word,<br>but asking the <span class="emphasis">right first question.</span></p>
+                </div>
+            </section>
+
+            <!-- Slide 22: Micro-practices -->
+            <section>
+                <h2>Micro-practices</h2>
+                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2.2;">
+                    <p style="margin: 1.8em 0;"><span class="emphasis">→</span> Build <strong>one PoC per quarter</strong></p>
+                    <p style="margin: 1.8em 0;"><span class="emphasis">→</span> Review code on <strong>strategic projects</strong></p>
+                    <p style="margin: 1.8em 0;"><span class="emphasis">→</span> Shadow teams that <strong>don't report to you</strong></p>
+                </div>
+                <p style="text-align: center; margin-top: 3em; font-size: 1.1em; font-style: italic; color: #7f8c8d;">Small actions, sustained credibility</p>
+            </section>
+
+            <!-- Slide 23: Lesson 3 Title -->
+            <section>
+                <h2>Lesson 3</h2>
+                <h3 style="margin-top: 2em;">Using small wins as<br><span class="emphasis">strategic leverage</span></h3>
+            </section>
+
+            <!-- Slide 24: Technical Persuasion -->
+            <section>
+                <p class="big-quote">"The best way to influence<br>without authority is through<br><span class="emphasis">concrete examples</span><br>that speak for themselves."</p>
+                <p style="text-align: center; margin-top: 3em; font-size: 1.2em; font-style: italic; color: #7f8c8d;">Proof-of-concepts are the modern form<br>of technical persuasion</p>
+            </section>
+
+            <!-- Slide 25: Small Win Examples -->
+            <section>
+                <h2>Small Wins in Action</h2>
+                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 2em 0;">→ A <span class="emphasis">small script</span> that links two internal systems</p>
+                    <p style="margin: 2em 0;">→ A <span class="emphasis">shared dashboard</span> connecting technical and business metrics</p>
+                    <p style="margin: 2em 0;">→ An <span class="emphasis">automation</span> that removes repetitive manual work</p>
+                </div>
+                <p style="text-align: center; margin-top: 3em; font-size: 1em; font-style: italic; color: #7f8c8d;">Start small, prove value, scale impact</p>
+            </section>
+
+            <!-- Slide 26: Reducing the Gap -->
+            <section>
+                <p class="quote-slide">"Each visible result reduces the gap<br>between those who <span class="emphasis">decide</span><br>and those who <span class="emphasis">deliver.</span>"</p>
+            </section>
+
+            <!-- Slide 27: What is a Trojan-horse PoC -->
+            <section>
+                <h2>The Trojan-horse PoC</h2>
+                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2.2;">
+                    <p style="margin: 2em 0;">→ A <span class="emphasis">mini-project</span> solving a real, visible problem</p>
+                    <p style="margin: 2em 0;">→ <span class="emphasis">Measurable impact</span>, minimal cost</p>
+                    <p style="margin: 2em 0;">→ Built to show <span class="emphasis">potential</span>, not perfection</p>
+                </div>
+            </section>
+
+            <!-- Slide 28: Committee Approval -->
+            <section>
+                <p class="big-quote" style="font-size: 2.2em;">"You don't need a committee's approval<br>to change how people see technology.<br><br>You need <span class="emphasis">one example</span><br>that works."</p>
+            </section>
+
+            <!-- Slide 29: Practical Examples -->
+            <section>
+                <h2>Practical Examples</h2>
+                <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.8em; line-height: 1.8;">
+                    <p style="margin: 2em 0;"><strong>Bridging business units</strong><br><span style="color: #7f8c8d;">Simple API connecting two isolated databases<br>→ Later adopted by both teams</span></p>
+                    <p style="margin: 2em 0;"><strong>Talking with the board</strong><br><span style="color: #7f8c8d;">Dashboard linking uptime or bug data to revenue and NPS<br>→ Makes technical work visible to leadership</span></p>
+                    <p style="margin: 2em 0;"><strong>Reducing internal friction</strong><br><span style="color: #7f8c8d;">Automation script removing repetitive manual work<br>→ Frees time across departments</span></p>
+                </div>
+            </section>
+
+            <!-- Slide 30: Common Language -->
+            <section>
+                <p class="quote-slide" style="font-size: 1.8em;">"Each PoC becomes a<br><span class="emphasis">common language.</span><br><br>It doesn't explain—it shows.<br><br>It's the most credible<br>form of strategy."</p>
+            </section>
+
+            <!-- Slide 31: How to Build It -->
+            <section>
+                <h2>How to Build It</h2>
+                <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.8em 0;"><span class="emphasis">1. Pick the right problem</span><br><span style="color: #7f8c8d; font-size: 0.9em;">Affects two functions, has a natural sponsor</span></p>
+                    <p style="margin: 1.8em 0;"><span class="emphasis">2. Limit the scope</span><br><span style="color: #7f8c8d; font-size: 0.9em;">One week of work maximum</span></p>
+                    <p style="margin: 1.8em 0;"><span class="emphasis">3. Measure the impact</span><br><span style="color: #7f8c8d; font-size: 0.9em;">Show before and after</span></p>
+                    <p style="margin: 1.8em 0;"><span class="emphasis">4. Frame as opportunity</span><br><span style="color: #7f8c8d; font-size: 0.9em;">Not challenge, but possibility</span></p>
+                </div>
+            </section>
+
+            <!-- Slide 32: Leadership Goal -->
+            <section>
+                <p class="big-quote">"Leadership goal:<br><br>Create new leaders,<br>make yourself <span class="emphasis">unnecessary.</span>"</p>
+            </section>
+
+            <!-- Slide 33: Practical Application - Intro -->
+            <section>
+                <h2>Putting It All Together</h2>
+                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">We've covered three ideas:</p>
+                    <p style="margin: 1.5em 0; padding-left: 1.5em;">→ <span class="emphasis">Maintaining credibility</span> as an individual contributor</p>
+                    <p style="margin: 1.5em 0; padding-left: 1.5em;">→ <span class="emphasis">Translating</span> the language of value</p>
+                    <p style="margin: 1.5em 0; padding-left: 1.5em;">→ Using <span class="emphasis">small examples</span> to influence strategy</p>
+                    <p style="margin: 2.5em 0; margin-top: 3em; text-align: center; font-style: italic;">Let's close with how to apply these daily</p>
+                </div>
+            </section>
+
+            <!-- Slide 34: Operational Framework -->
+            <section>
+                <h2>Three Steps to Influence Without Authority</h2>
+                <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 2em 0;"><span class="emphasis">1. Show concrete value</span><br><span style="color: #7f8c8d; font-size: 0.9em;">Use data, outcomes, visible PoCs</span></p>
+                    <p style="margin: 2em 0;"><span class="emphasis">2. Share technical-strategic language</span><br><span style="color: #7f8c8d; font-size: 0.9em;">Connect uptime to margins, latency to customer experience</span></p>
+                    <p style="margin: 2em 0;"><span class="emphasis">3. Build alliances through delivery</span><br><span style="color: #7f8c8d; font-size: 0.9em;">Don't persuade—collaborate</span></p>
+                </div>
+            </section>
+
+            <!-- Slide 35: Code as Leadership Tool -->
+            <section>
+                <p class="big-quote">"Every technical action should echo<br>in the language of business.<br><br>That's how code becomes<br>a <span class="emphasis">leadership tool.</span>"</p>
+            </section>
+
+            <!-- Slide 36: Product-Style Listening -->
+            <section>
+                <h2>Listen Like a Product Manager</h2>
+                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                    <p style="margin: 1.5em 0;">Define the <span class="emphasis">problem</span> before proposing the solution.</p>
+                    <p style="margin: 2em 0; font-style: italic; color: #7f8c8d;">Listening isn't compliance—it's exploration<br>of the problem space before the solution space.</p>
+                    <p style="margin: 2.5em 0; margin-top: 3em; text-align: center; font-size: 1em; color: #3498db; font-weight: 500;">"Good listening defines the problem space<br>before coding the solution space."</p>
+                </div>
+            </section>
+
+            <!-- Slide 37: Batman Quote -->
+            <section>
+                <p class="quote-slide">"He's not the hero Gotham deserves,<br>but the one it <span class="emphasis">needs</span> right now."</p>
+                <p style="text-align: center; margin-top: 2em; color: #7f8c8d; font-size: 0.7em;">— Batman, Christopher Nolan (adapted)</p>
+            </section>
+
+            <!-- Slide 38: Mental Exercise -->
+            <section>
+                <h2>A Mental Exercise</h2>
+                <div style="margin: 3em auto; max-width: 900px; text-align: center; font-size: 0.9em; line-height: 2;">
+                    <p style="margin: 2em 0; font-size: 1.1em;">"If tomorrow you could build <span class="emphasis">one PoC</span><br>to align two teams that never talk,<br><br>what would it be?</p>
+                    <p style="margin: 3em 0; margin-top: 4em; color: #7f8c8d; font-style: italic;">How long would it take to show its value?"</p>
+                </div>
+            </section>
+
+            <!-- Slide 39: Closing -->
+            <section>
+                <div style="margin: 3em auto; max-width: 900px; text-align: center;">
+                    <p style="font-size: 1.3em; line-height: 1.8; margin: 2em 0;">"Technical leadership isn't about<br>leaving code for strategy—<br><br>it's about bringing <span class="emphasis">strategy into the code.</span>"</p>
+                    <p style="margin: 3em 0; margin-top: 4em; font-style: italic; color: #7f8c8d;">Staying hands-on isn't a limitation;<br>it's the most reliable way to stay credible.</p>
+                </div>
+            </section>
+
+            <!-- Slide 40: Final Message -->
+            <section>
+                <p class="big-quote" style="font-size: 3em;">"Stay <span class="emphasis">technical</span><br>to stay <span class="emphasis">credible.</span>"</p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Quick navigation menu -->
+    <div class="nav-menu" id="navMenu">
+        <div class="nav-menu-title">Quick Navigation</div>
+        <div class="nav-menu-actions">
+            <button class="nav-menu-btn" onclick="goToSlide('first')">⏮ First Slide</button>
+            <button class="nav-menu-btn" onclick="goToSlide('last')">⏭ Last Slide</button>
+            <button class="nav-menu-btn secondary" onclick="toggleOverview()">📋 Overview</button>
+        </div>
+        <div class="nav-menu-input">
+            <input type="number" id="slideInput" placeholder="Slide #" min="1" onkeypress="if(event.key==='Enter') goToSlideNumber()">
+            <button onclick="goToSlideNumber()">Go</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            transition: 'slide',
+            backgroundTransition: 'fade',
+            controlsLayout: 'bottom-right',
+            progress: true,
+            center: true,
+            width: 1280,
+            height: 720,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+
+            // Keyboard shortcuts for clicker support
+            keyboard: {
+                32: 'next', // Space
+                37: 'prev', // Left arrow
+                38: 'prev', // Up arrow
+                39: 'next', // Right arrow
+                40: 'next', // Down arrow
+                33: 'prev', // Page up
+                34: 'next'  // Page down
+            }
+        });
+
+        // Initialize navigation menu after reveal is ready
+        Reveal.addEventListener('ready', function() {
+            const slideNumber = document.querySelector('.slide-number');
+            const navMenu = document.getElementById('navMenu');
+
+            // Toggle menu on slide number click
+            if (slideNumber) {
+                slideNumber.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navMenu.classList.toggle('active');
+                });
+            }
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!navMenu.contains(e.target) && !e.target.closest('.slide-number')) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Navigation functions
+        function goToSlide(position) {
+            if (position === 'first') {
+                Reveal.slide(0);
+            } else if (position === 'last') {
+                const totalSlides = Reveal.getTotalSlides();
+                Reveal.slide(totalSlides - 1);
+            }
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        function goToSlideNumber() {
+            const input = document.getElementById('slideInput');
+            const slideNum = parseInt(input.value);
+            const totalSlides = Reveal.getTotalSlides();
+
+            if (slideNum >= 1 && slideNum <= totalSlides) {
+                Reveal.slide(slideNum - 1);
+                input.value = '';
+                document.getElementById('navMenu').classList.remove('active');
+            }
+        }
+
+        function toggleOverview() {
+            Reveal.toggleOverview();
+            document.getElementById('navMenu').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
