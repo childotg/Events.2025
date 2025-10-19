@@ -15,7 +15,7 @@ Purpose: define the context, constraints, and target audience.
 - Primary audience (role, seniority): Platform engineers, DevOps engineers, engineering managers, tech leads (mixed seniority: mid to senior)
 - Prerequisites / assumed knowledge: None required. Basic concepts (DevOps, stateless/stateful, object storage) will be introduced during the talk
 - Talk type (spoken / hands-on / demo / mixed / panel): Spoken with case study narrative and visual diagrams
-- Constraints (room, tech, timing, etc.): 45-minute slot including Q&A buffer (aim for 38-40 min content), standard conference room with projector, no live demos required
+- Constraints (room, tech, timing, etc.): 45-minute slot including Q&A buffer (46 min content + tight timing, no buffer), standard conference room with projector, no live demos required
 - Expected post-talk action: Within 7 days, identify and evaluate one platform decision in their current work that can be approached iteratively (with low switching costs) rather than as a permanent choice
 
 ## Checklist

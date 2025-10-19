@@ -52,29 +52,49 @@ Purpose: guide live delivery and timing.
    - We needed to act fast
    - PAUSE: This is the principle connecting hook to buy phase
 
-5. **The Buy Phase** (7 min, slides 28-32)
+5. **The Buy Phase** (9 min, slides 28-35)
    - "Act fast, without breaking production, with low exit cost"
-   - Not permanent. Reversible if needed.
-   - Vendor selection criteria: S3 compatibility, zero downtime migration
-   - Managed service transition
-   - Business continuity maintained
+   - **Vendor landscape**: Azure Blob, Oracle, third-party providers (visual grid)
+   - **Selection criteria** (progressive reveal):
+     • No egress fees (critical for reversibility)
+     • Stable, certified pricing model
+     • Lower cost than major cloud providers
+     • Performance to be validated (trade-off acknowledged)
+   - **Platform service philosophy**: 24/7 critical, N→10N client scaling, no maintenance windows
+   - **Zero-downtime migration** (4-step visual):
+     1. Identify usage points
+     2. Prepare new environment (buckets)
+     3. Active replication (MinIO feature)
+     4. Switch service by service
+   - **Switch process**: formal deprecation email, deadline, all teams migrated successfully
+   - **Grace period**: MinIO stopped (not dismessed), 1-2 weeks, surface unknown clients, clean decommission
 
-6. **The Learning Year** (6 min, slides 33-37)
-   - Team reorganizes: less ops, more governance
-   - Hidden requirements now visible
-   - Focus shifts: tech control → business needs discovery
-   - "Governance scales, code doesn't"
+6. **The Learning Year** (7 min, slides 36-40)
+   - **Slide 36**: "Why not go managed from day one?" - "Because we didn't know what we needed yet"
+   - Build phase taught us: real workloads, bottlenecks, hidden requirements
+   - During Build: learning domain, too busy to reflect
+   - With Managed: informed selection, time to think
+   - **Slide 37**: Platform as Product - clients see stability, team iterates (hidden)
+   - **Slide 38**: Observation period - adoption grew, Data Platform teams (data lakes)
+   - **Slide 39**: Data lake scenario - very high file count → performance issues (latency, throughput, listing), feature requests (logging, metrics, security, compliance)
+   - **Slide 40**: Pattern emerges - Make v2 with ALL real requirements (initial + make + buy + production)
 
-7. **The Rebuild** (4 min, slides 38-41)
-   - Return to internal with clarity
-   - Definitive characteristics defined by production experience
-   - Not failure → informed iteration
+7. **The Rebuild** (5 min, slides 41-45)
+   - **Slide 41**: Hybrid approach - software control (MinIO) + ops delegated (third party: servers, disks, RAID)
+   - Bare metal decision (not public cloud) - disk-intensive performance
+   - "Backbone of cloud without seeing it"
+   - **Slide 42**: Switch v2 - painless migration, standardized endpoints + governance = no client notification needed
+   - **Slide 43**: "How many times can we do this?" - existential question
+   - **Slide 44**: "As many times as needed" - each iteration reveals truth
+   - **Slide 45**: Build → Buy → Build v2 (Hybrid) - informed evolution, each phase added knowledge
 
-8. **Lessons + CTA** (4 min, slides 42-46)
-   - Takeaway 1: Low exit costs > perfect decisions
-   - Takeaway 2: Governance = business discovery
-   - Takeaway 3: Iteration reveals truth
-   - CTA: Identify one platform decision to treat as experiment
+8. **Lessons + CTA** (4 min, slides 46-51)
+   - **Slide 46**: "What did we learn from this journey?"
+   - **Slide 47** (Takeaway 1): Low exit costs enable learning faster than perfect decisions - reversibility beats correctness
+   - **Slide 48** (Takeaway 2): Platform governance = business needs discovery, not just tech control
+   - **Slide 49** (Takeaway 3): Governance scales, code doesn't - real platform is organizational capability
+   - **Slide 50** (CTA): Identify one platform choice you can make reversible this week
+   - **Slide 51**: Iteration isn't indecision—it's strategic learning
 
 ### Audience interaction
 - Questions to ask: "Who's faced a platform decision that felt permanent?" (show of hands at Section 3)
@@ -86,9 +106,9 @@ Purpose: guide live delivery and timing.
 - "Iteration isn't indecision—it's strategic learning"
 
 ### Operational notes
-- **Total slides**: 49 slides (0-48) including opening/feedback images
-- **Content slides**: 47 slides (average 51 seconds per slide)
-- Timing per section: 5/6/8/2/7/6/4/4 minutes (42 min total + 3 min buffer)
+- **Total slides**: 53 slides (0-52) including opening/feedback images
+- **Content slides**: 51 slides (average 52 seconds per slide)
+- Timing per section: 5/6/8/2/9/7/5/4 minutes (46 min total, no buffer - tight timing)
 - Planned pauses: After opening hook (2s), after reversibility principle (3s), before CTA (2s)
 - Backup plan: If running long, compress Section 1 to 3 min (Keycloak deep dive can be summarized faster)
 - Follow-up materials: Framework diagram for make/buy/iterate decisions (can share as PDF or GitHub link)

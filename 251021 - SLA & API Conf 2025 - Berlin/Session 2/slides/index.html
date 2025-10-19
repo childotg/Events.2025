@@ -781,168 +781,440 @@
                 <p class="small-text fragment" style="margin-top: 2em;">Not permanent. Reversible if needed.</p>
             </section>
 
-            <!-- Slide 29: Selection Criteria -->
+            <!-- Slide 29: Vendor Landscape -->
             <section>
-                <h2>What We Looked For</h2>
-                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2;">
-                    <p style="margin: 1.5em 0;">→ S3-compatible (minimize migration)</p>
-                    <p style="margin: 1.5em 0;">→ <span class="emphasis">Zero downtime</span> migration path</p>
-                    <p style="margin: 1.5em 0;">→ Multi-region support</p>
-                    <p style="margin: 1.5em 0;">→ Compliance certifications</p>
+                <h2>S3-Compatible Services: The Landscape</h2>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5em; margin: 2.5em auto; max-width: 700px;">
+                    <div style="background: linear-gradient(135deg, #FF9900 0%, #ec7211 100%); color: white; padding: 1.5em; border-radius: 8px; text-align: center;">
+                        <strong style="font-size: 1.1em;">AWS S3</strong>
+                        <p style="font-size: 0.75em; margin-top: 1em; opacity: 0.9;">Original & market leader</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #f80000 0%, #c20000 100%); color: white; padding: 1.5em; border-radius: 8px; text-align: center;">
+                        <strong style="font-size: 1.1em;">Oracle Cloud Storage</strong>
+                        <p style="font-size: 0.75em; margin-top: 1em; opacity: 0.9;">S3-compatible</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #7f8c8d 0%, #5a6268 100%); color: white; padding: 1.5em; border-radius: 8px; text-align: center;">
+                        <strong style="font-size: 1.1em;">Third-party providers</strong>
+                        <p style="font-size: 0.75em; margin-top: 1em; opacity: 0.9;">Specialized vendors</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%); color: white; padding: 1.5em; border-radius: 8px; text-align: center;">
+                        <strong style="font-size: 1.1em;">Self-hosted (MinIO)</strong>
+                        <p style="font-size: 0.75em; margin-top: 1em; opacity: 0.9;">Full control</p>
+                    </div>
+                </div>
+                <p class="small-text fragment" style="margin-top: 1em;">Wide range of options. How to choose?</p>
+            </section>
+
+            <!-- Slide 30: Vendor Selection Criteria -->
+            <section>
+                <h2>Our Selection Criteria</h2>
+                <div style="margin: 2.5em auto; max-width: 950px;">
+                    <div style="display: flex; flex-direction: column; gap: 1.2em;">
+                        <div style="display: flex; align-items: center; gap: 1em; padding: 1em; background: #ecf0f1; border-radius: 6px;">
+                            <span style="font-size: 1.8em; color: #27ae60;">✓</span>
+                            <div style="text-align: left; flex: 1;">
+                                <strong>No egress fees</strong>
+                                <p style="font-size: 0.8em; color: #7f8c8d; margin-top: 0.3em;">Critical for reversibility</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1em; padding: 1em; background: #ecf0f1; border-radius: 6px;" class="fragment">
+                            <span style="font-size: 1.8em; color: #27ae60;">✓</span>
+                            <div style="text-align: left; flex: 1;">
+                                <strong>Stable, certified pricing model</strong>
+                                <p style="font-size: 0.8em; color: #7f8c8d; margin-top: 0.3em;">Predictable costs</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1em; padding: 1em; background: #ecf0f1; border-radius: 6px;" class="fragment">
+                            <span style="font-size: 1.8em; color: #27ae60;">✓</span>
+                            <div style="text-align: left; flex: 1;">
+                                <strong>Lower cost than major cloud providers</strong>
+                                <p style="font-size: 0.8em; color: #7f8c8d; margin-top: 0.3em;">Budget efficiency</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1em; padding: 1em; background: #fff3cd; border-radius: 6px; border-left: 4px solid #ffc107;" class="fragment">
+                            <span style="font-size: 1.8em; color: #f39c12;">?</span>
+                            <div style="text-align: left; flex: 1;">
+                                <strong>Performance</strong>
+                                <p style="font-size: 0.8em; color: #856404; margin-top: 0.3em;">To be validated (not tested yet)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="small-text fragment" style="margin-top: 1.5em;">We chose a <span class="emphasis">less-known vendor</span> with the right guarantees</p>
+            </section>
+
+            <!-- Slide 31: Platform Service Philosophy -->
+            <section>
+                <h2>Platform Service = Critical Service</h2>
+                <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 1.8;">
+                    <p style="margin: 1.2em 0;">
+                        <span class="emphasis">Centralized service → Essential & indispensable</span>
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <strong>Uptime requirement:</strong> 24/7, no maintenance windows
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <strong>Why?</strong> N clients today → 10N clients tomorrow<br>
+                        <span style="font-size: 0.85em; color: #7f8c8d;">Impossible to find a common downtime window for all</span>
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <strong>Our approach:</strong> Treat it as <span class="emphasis">critical from day one</span>
+                    </p>
                 </div>
             </section>
 
-            <!-- Slide 30: Migration Strategy -->
+            <!-- Slide 32: Zero-Downtime Migration Strategy -->
             <section>
-                <h2>The Key Constraint</h2>
-                <p class="big-quote" style="font-size: 2.2em; margin-top: 1.5em;"><span class="emphasis">Zero downtime</span><br>migration</p>
-                <p class="small-text" style="margin-top: 2em;">Business continuity was non-negotiable</p>
-            </section>
-
-            <!-- Slide 31: Transition Success -->
-            <section>
-                <h2>The Switch</h2>
-                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2;">
-                    <p style="margin: 1.5em 0;">→ Gradual data migration</p>
-                    <p style="margin: 1.5em 0;">→ Dual-write period</p>
-                    <p style="margin: 1.5em 0;">→ Cut-over per service</p>
-                    <p style="margin: 1.5em 0;">→ <span class="emphasis">Zero incidents</span></p>
+                <h2>Zero-Downtime Migration Strategy</h2>
+                <div style="margin: 2.5em auto; max-width: 1000px;">
+                    <div style="display: flex; flex-direction: column; gap: 1em;">
+                        <!-- Step 1 -->
+                        <div style="display: flex; align-items: center; gap: 1.5em;">
+                            <div style="min-width: 60px; height: 60px; background: #3498db; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5em; font-weight: bold;">1</div>
+                            <div style="flex: 1; background: #ecf0f1; padding: 1em; border-radius: 6px; text-align: left;">
+                                <strong>Identify usage points</strong>
+                                <p style="font-size: 0.8em; color: #7f8c8d; margin-top: 0.3em;">Map all services using the platform</p>
+                            </div>
+                        </div>
+                        <!-- Step 2 -->
+                        <div style="display: flex; align-items: center; gap: 1.5em;" class="fragment">
+                            <div style="min-width: 60px; height: 60px; background: #3498db; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5em; font-weight: bold;">2</div>
+                            <div style="flex: 1; background: #ecf0f1; padding: 1em; border-radius: 6px; text-align: left;">
+                                <strong>Prepare new environment</strong>
+                                <p style="font-size: 0.8em; color: #7f8c8d; margin-top: 0.3em;">Create buckets/containers for objects</p>
+                            </div>
+                        </div>
+                        <!-- Step 3 -->
+                        <div style="display: flex; align-items: center; gap: 1.5em;" class="fragment">
+                            <div style="min-width: 60px; height: 60px; background: #3498db; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5em; font-weight: bold;">3</div>
+                            <div style="flex: 1; background: #ecf0f1; padding: 1em; border-radius: 6px; text-align: left;">
+                                <strong>Active replication</strong>
+                                <p style="font-size: 0.8em; color: #7f8c8d; margin-top: 0.3em;">MinIO feature (or external tool)</p>
+                            </div>
+                        </div>
+                        <!-- Step 4 -->
+                        <div style="display: flex; align-items: center; gap: 1.5em;" class="fragment">
+                            <div style="min-width: 60px; height: 60px; background: #27ae60; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5em; font-weight: bold;">4</div>
+                            <div style="flex: 1; background: #d5f4e6; padding: 1em; border-radius: 6px; text-align: left;">
+                                <strong>Switch service by service</strong>
+                                <p style="font-size: 0.8em; color: #27ae60; margin-top: 0.3em;">Gradual, controlled transition</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- Slide 32: Breathing Room -->
+            <!-- Slide 33: The Switch Process -->
+            <section>
+                <h2>The Switch Process</h2>
+                <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 1.8;">
+                    <p style="margin: 1.2em 0;">
+                        <span class="emphasis">Formal deprecation notice</span><br>
+                        <span style="font-size: 0.85em; color: #7f8c8d;">Email to all teams with deadline (like a product company)</span>
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <strong>Internal services, but formal process</strong><br>
+                        <span style="font-size: 0.85em; color: #7f8c8d;">Request to switch, clear timeline</span>
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <strong>Result:</strong> Switch completed successfully<br>
+                        <span style="font-size: 0.85em; color: #27ae60;">All teams migrated within deadline</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 34: Grace Period & Decommission -->
+            <section>
+                <h2>Grace Period & Decommission</h2>
+                <div style="margin: 2.5em auto; max-width: 950px;">
+                    <div style="display: flex; align-items: center; gap: 2em; margin-bottom: 2em;">
+                        <div style="flex: 1; text-align: center;">
+                            <div style="background: #e74c3c; color: white; padding: 1.5em; border-radius: 8px;">
+                                <p style="font-size: 1.2em; font-weight: bold; margin: 0;">MinIO Stopped</p>
+                                <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.9;">(not dismessed)</p>
+                            </div>
+                        </div>
+                        <div style="font-size: 2em; color: #7f8c8d;">→</div>
+                        <div style="flex: 1; text-align: center;">
+                            <div style="background: #f39c12; color: white; padding: 1.5em; border-radius: 8px;">
+                                <p style="font-size: 1.2em; font-weight: bold; margin: 0;">Grace Period</p>
+                                <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.9;">1-2 weeks</p>
+                            </div>
+                        </div>
+                        <div style="font-size: 2em; color: #7f8c8d;">→</div>
+                        <div style="flex: 1; text-align: center;">
+                            <div style="background: #95a5a6; color: white; padding: 1.5em; border-radius: 8px;">
+                                <p style="font-size: 1.2em; font-weight: bold; margin: 0;">Decommissioned</p>
+                                <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.9;">Permanently removed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="small-text fragment" style="text-align: center; margin-top: 2em;">
+                        <span class="emphasis">Goal:</span> Surface any unknown clients during grace period
+                    </p>
+                    <p class="small-text fragment" style="text-align: center; margin-top: 1em; color: #27ae60;">
+                        No unknown clients emerged. Clean decommission.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 35: Breathing Room -->
             <section>
                 <p class="quote-slide">"Now we had breathing room<br>to understand what we<br><span class="emphasis">really needed</span>..."</p>
             </section>
 
-            <!-- SECTION 5: THE LEARNING YEAR (6 min, 5 slides) -->
+            <!-- SECTION 6: THE LEARNING YEAR (6 min, 5 slides) -->
 
-            <!-- Slide 33: The Shift -->
+            <!-- Slide 36: The Shift -->
             <section>
-                <h2>What Changed</h2>
+                <h2>Why Not Go Managed From Day One?</h2>
+                <div style="margin: 1.5em auto; max-width: 950px; text-align: left;">
+                    <p class="quote-slide" style="font-size: 1.4em; margin-bottom: 1.5em;">
+                        "We didn't know what we needed yet"
+                    </p>
+                    <div style="background: #fff3cd; padding: 1.2em; border-radius: 8px; border-left: 4px solid #f39c12; margin-bottom: 1.5em;">
+                        <p style="font-size: 0.8em; margin: 0; color: #856404; line-height: 1.6;">
+                            <strong>Build phase = Learning:</strong> Real workloads, bottlenecks, hidden requirements
+                        </p>
+                    </div>
+                    <div class="comparison">
+                        <div class="before">
+                            <h4>During Build</h4>
+                            <p style="font-size: 0.7em; margin-top: 1.2em; line-height: 1.6;">
+                                Learning domain<br>
+                                Discovering needs<br>
+                                <span style="color: #e74c3c;">Too busy to reflect</span>
+                            </p>
+                        </div>
+                        <div class="after">
+                            <h4>With Managed Service</h4>
+                            <p style="font-size: 0.7em; margin-top: 1.2em; line-height: 1.6;">
+                                <strong>Informed selection</strong><br>
+                                <strong>Apply learnings</strong><br>
+                                <span style="color: #27ae60;"><strong>Time to think</strong></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 37: Platform as Product Philosophy -->
+            <section>
+                <h2>Platform as Product</h2>
                 <div class="comparison">
                     <div class="before">
-                        <h4>During MinIO</h4>
+                        <h4>For Clients</h4>
                         <p style="font-size: 0.75em; margin-top: 1.5em; line-height: 1.8;">
-                            Operations-focused<br>
-                            Reactive problem-solving<br>
-                            Tech governance
+                            <strong>Always stable & definitive</strong><br>
+                            No "beta" labels<br>
+                            No "we're testing"<br>
+                            <span style="color: #27ae60;">Trust = Adoption</span>
                         </p>
                     </div>
                     <div class="after">
-                        <h4>With Managed Service</h4>
+                        <h4>For Platform Team</h4>
                         <p style="font-size: 0.75em; margin-top: 1.5em; line-height: 1.8;">
-                            <strong>Strategy-focused</strong><br>
-                            <strong>Proactive planning</strong><br>
-                            <strong>Business governance</strong>
+                            <strong>Conscious iteration</strong><br>
+                            Hidden experiments<br>
+                            Reversible decisions<br>
+                            <span style="color: #3498db;">Learning = Strategy</span>
+                        </p>
+                    </div>
+                </div>
+                <p class="small-text" style="margin-top: 2em; text-align: center;">
+                    Clients don't see iterations. They see a reliable platform.
+                </p>
+            </section>
+
+            <!-- Slide 38: The Learning Year - Observation -->
+            <section>
+                <h2>We Let It Run</h2>
+                <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 1.8;">
+                    <p style="margin: 1.2em 0;">
+                        <span class="emphasis">Managed service running in production</span>
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        Adoption grew organically<br>
+                        <span style="font-size: 0.85em; color: #7f8c8d;">More teams, more use cases</span>
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <strong>New scenario emerged:</strong> Data Platform teams<br>
+                        <span style="font-size: 0.85em; color: #7f8c8d;">Data lakes → scenarios we hadn't anticipated</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 39: New Requirements Surface -->
+            <section>
+                <h2>Data Lake Scenario</h2>
+                <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 1.8;">
+                    <p style="margin: 1.2em 0;">
+                        <span class="emphasis">Very high file count</span> → Performance issues
+                    </p>
+                    <div style="background: #fff3cd; padding: 1em; border-radius: 6px; border-left: 4px solid #f39c12; margin: 1.5em 0;">
+                        <p style="margin: 0; color: #856404; font-size: 0.95em;">
+                            • Latency issues<br>
+                            • Throughput bottlenecks<br>
+                            • Listing operations slow
+                        </p>
+                    </div>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <strong>Feature requests accumulate:</strong><br>
+                        Advanced logging, metrics, security, compliance...
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <strong>Why didn't we see this before?</strong><br>
+                        <span style="font-size: 0.9em; color: #7f8c8d;">Common denominator clients didn't have these needs</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 40: The Pattern Emerges -->
+            <section>
+                <h2>The Pattern Emerges</h2>
+                <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 1.8;">
+                    <p style="margin: 1.2em 0;">
+                        A new iteration started forming in our minds...
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <span class="emphasis">Make v2</span>
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        But this time with <strong>ALL the real requirements:</strong>
+                    </p>
+                    <div style="background: #ecf0f1; padding: 1.2em; border-radius: 6px; margin: 1.5em 0;" class="fragment">
+                        <p style="margin: 0; font-size: 0.85em; line-height: 1.6;">
+                            ✓ Initial requirements<br>
+                            ✓ Make phase learnings<br>
+                            ✓ Buy phase discoveries<br>
+                            ✓ Production reality
                         </p>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 34: Team Reorganization -->
+            <!-- SECTION 7: THE REBUILD (5 min, 4 slides) -->
+
+            <!-- Slide 41: The Rebuild - Different Approach -->
             <section>
-                <h2>Team Evolution</h2>
-                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2;">
-                    <p style="margin: 1.5em 0;">→ Less operational overhead</p>
-                    <p style="margin: 1.5em 0;">→ More time for requirements discovery</p>
-                    <p style="margin: 1.5em 0;">→ Focus on <span class="emphasis">business needs</span>, not tech specs</p>
+                <h2>The Rebuild: A Hybrid Approach</h2>
+                <div style="margin: 2em auto; max-width: 950px; text-align: left; font-size: 0.85em; line-height: 1.8;">
+                    <div style="display: flex; gap: 1.5em; margin-bottom: 1.5em;">
+                        <div style="flex: 1; background: #e3f2fd; padding: 1.2em; border-radius: 6px; border-left: 4px solid #2196f3;">
+                            <strong style="color: #1976d2;">Software Control</strong>
+                            <p style="margin: 0.8em 0 0 0; font-size: 0.95em;">MinIO under our control<br>All features needed</p>
+                        </div>
+                        <div style="flex: 1; background: #f3e5f5; padding: 1.2em; border-radius: 6px; border-left: 4px solid #9c27b0;">
+                            <strong style="color: #7b1fa2;">Operations Delegated</strong>
+                            <p style="margin: 0.8em 0 0 0; font-size: 0.95em;">Third party handles infra<br>Servers, disks, RAID</p>
+                        </div>
+                    </div>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <strong>Key decision:</strong> Bare metal (not public cloud)
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <strong>Why?</strong> Disk-intensive performance requirements<br>
+                        <span style="font-size: 0.9em; color: #7f8c8d;">"The backbone of cloud... without seeing it"</span>
+                    </p>
                 </div>
             </section>
 
-            <!-- Slide 35: Hidden Requirements Revealed -->
+            <!-- Slide 42: The Switch v2 -->
             <section>
-                <h2>What We Learned</h2>
-                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2;">
-                    <p style="margin: 1.5em 0;">→ Cost patterns across teams</p>
-                    <p style="margin: 1.5em 0;">→ Actual compliance requirements</p>
-                    <p style="margin: 1.5em 0;">→ Regional data sovereignty needs</p>
-                    <p style="margin: 1.5em 0;">→ Integration patterns with other platforms</p>
+                <h2>The Switch v2: Lessons Applied</h2>
+                <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 1.8;">
+                    <p style="margin: 1.2em 0;">
+                        <span class="emphasis">Migration: painless</span>
+                    </p>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        <strong>Why?</strong> We learned from the first time
+                    </p>
+                    <div style="background: #d5f4e6; padding: 1.2em; border-radius: 6px; border-left: 4px solid #27ae60; margin: 1.5em 0;" class="fragment">
+                        <p style="margin: 0; color: #1e7e34; font-size: 0.9em; line-height: 1.6;">
+                            <strong>Standardized endpoints + governance =</strong><br>
+                            Switch possible <span class="emphasis">without notifying clients</span>
+                        </p>
+                    </div>
+                    <p style="margin: 1.2em 0;" class="fragment">
+                        Total transparency for users<br>
+                        <span style="font-size: 0.85em; color: #7f8c8d;">Platform as product: seamless iteration</span>
+                    </p>
                 </div>
             </section>
 
-            <!-- Slide 36: Key Insight -->
+            <!-- Slide 43: The Question -->
             <section>
-                <p class="quote-slide">"<span class="emphasis">Governance</span> scales,<br>code doesn't"</p>
-                <p class="small-text" style="margin-top: 2em;">The real platform is the organizational capability</p>
+                <p class="quote-slide" style="font-size: 1.6em;">
+                    "How many times<br>can we do this?"
+                </p>
+                <p class="small-text fragment" style="margin-top: 2em;">
+                    Will we need another iteration in a year?
+                </p>
+                <p class="small-text fragment" style="margin-top: 1em;">
+                    Another vendor? Another rebuild?
+                </p>
             </section>
 
-            <!-- Slide 37: With Clarity -->
+            <!-- Slide 44: The Answer -->
             <section>
-                <p class="quote-slide">"With clarity,<br>we could rebuild<br><span class="emphasis">properly</span>..."</p>
+                <p class="big-quote" style="font-size: 2.2em;">
+                    As many times<br>as <span class="emphasis">needed</span>
+                </p>
+                <p class="small-text fragment" style="margin-top: 2em;">
+                    Each iteration reveals truth
+                </p>
             </section>
 
-            <!-- SECTION 6: THE REBUILD (4 min, 4 slides) -->
-
-            <!-- Slide 38: Return to Internal -->
+            <!-- Slide 45: The Journey -->
             <section>
-                <h2>The Rebuild</h2>
-                <p class="big-quote" style="font-size: 2em; margin-top: 1.5em;">Building with <span class="emphasis">knowledge</span><br>not assumptions</p>
+                <h2>Build → Buy → Build v2 (Hybrid)</h2>
+                <p class="quote-slide" style="font-size: 1.6em; margin-top: 1.5em;">Not failure.<br><span class="emphasis">Informed evolution</span>.</p>
+                <p class="small-text fragment" style="margin-top: 2em;">
+                    Each phase added knowledge, not just cost
+                </p>
             </section>
 
-            <!-- Slide 39: What Changed -->
-            <section>
-                <h2>This Time, We Knew</h2>
-                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2;">
-                    <p style="margin: 1.5em 0;">→ Exact performance requirements</p>
-                    <p style="margin: 1.5em 0;">→ Real compliance needs</p>
-                    <p style="margin: 1.5em 0;">→ Cost optimization strategies</p>
-                    <p style="margin: 1.5em 0;">→ <span class="emphasis">Business governance</span> framework</p>
-                </div>
-            </section>
-
-            <!-- Slide 40: Not Failure -->
-            <section>
-                <h2>Build → Buy → Build</h2>
-                <p class="quote-slide" style="font-size: 1.8em; margin-top: 1.5em;">Not failure.<br><span class="emphasis">Informed iteration</span>.</p>
-            </section>
-
-            <!-- Slide 41: The Pattern -->
+            <!-- Slide 46: The Pattern -->
             <section>
                 <p class="quote-slide">"What did we learn<br>from this journey?"</p>
             </section>
 
-            <!-- SECTION 7: LESSONS + CTA (4 min, 4 slides) -->
+            <!-- SECTION 8: LESSONS + CTA (4 min, 5 slides) -->
 
-            <!-- Slide 42: Lesson 1 -->
+            <!-- Slide 47: Lesson 1 -->
             <section>
                 <h2>Takeaway 1</h2>
-                <p class="big-quote" style="font-size: 2em; margin-top: 1.5em;"><span class="emphasis">Short-term</span> decisions<br>with low exit costs<br>enable faster learning</p>
+                <p class="big-quote" style="font-size: 2em; margin-top: 1.5em;"><span class="emphasis">Low exit costs</span><br>enable learning<br>faster than perfect decisions</p>
+                <p class="small-text fragment" style="margin-top: 2em;">Reversibility beats correctness</p>
             </section>
 
-            <!-- Slide 43: Lesson 2 -->
+            <!-- Slide 48: Lesson 2 -->
             <section>
                 <h2>Takeaway 2</h2>
                 <p class="big-quote" style="font-size: 2em; margin-top: 1.5em;">Platform governance<br>is about <span class="emphasis">business needs</span><br>discovery</p>
                 <p class="small-text" style="margin-top: 2em;">Not just technology control</p>
             </section>
 
-            <!-- Slide 44: Lesson 3 -->
+            <!-- Slide 49: Lesson 3 -->
             <section>
                 <h2>Takeaway 3</h2>
-                <p class="big-quote" style="font-size: 2em; margin-top: 1.5em;">Rebuilding after buying<br>isn't failure—<br>it's <span class="emphasis">informed iteration</span></p>
+                <p class="big-quote" style="font-size: 2em; margin-top: 1.5em;"><span class="emphasis">Governance</span> scales,<br>code doesn't</p>
+                <p class="small-text fragment" style="margin-top: 2em;">The real platform is organizational capability</p>
             </section>
 
-            <!-- Slide 45: Call to Action -->
+            <!-- Slide 50: Call to Action -->
             <section>
                 <h2>Your Next Step</h2>
                 <p class="quote-slide" style="font-size: 1.6em; margin-top: 1.5em;">"This week: identify <span class="emphasis">one</span><br>platform choice you can<br>make reversible"</p>
                 <p class="small-text" style="margin-top: 2em;">Test your assumptions with low switching costs</p>
             </section>
 
-            <!-- Slide 46: Final Message -->
+            <!-- Slide 51: Final Message -->
             <section>
                 <p class="big-quote">Iteration isn't indecision—<br>it's <span class="emphasis">strategic learning</span></p>
             </section>
 
-            <!-- Slide 47: Thank You -->
-            <section>
-                <h1>Thank You</h1>
-                <p style="margin-top: 2em; font-size: 1.2em;">Questions?</p>
-                <p class="small-text" style="margin-top: 3em;">Platform Engineering Beyond Build-vs-Buy • SLA & API Conf 2025</p>
-            </section>
-
-            <!-- Slide 48: Feedback Image -->
+            <!-- Slide 52: Feedback Image -->
             <section data-background-image="feedback_slide.jpg" data-background-size="contain">
             </section>
 
@@ -975,7 +1247,7 @@
             <button class="nav-menu-btn secondary" onclick="toggleOverview()">📋 Overview</button>
         </div>
         <div class="nav-menu-input">
-            <input type="number" id="slideInput" placeholder="Slide #" min="1" max="38" onkeypress="if(event.key==='Enter') goToSlideNumber()">
+            <input type="number" id="slideInput" placeholder="Slide #" min="1" max="52" onkeypress="if(event.key==='Enter') goToSlideNumber()">
             <button onclick="goToSlideNumber()">Go</button>
         </div>
     </div>
