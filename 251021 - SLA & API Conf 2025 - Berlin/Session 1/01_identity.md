@@ -16,7 +16,7 @@ Purpose: define the context, constraints, and target audience.
 - Primary audience (role, seniority): Senior engineers, tech leads, engineering managers, CTOs transitioning between product and service companies
 - Prerequisites / assumed knowledge: Experience in technical leadership roles; familiarity with product development and/or professional services contexts
 - Talk type (spoken / hands-on / demo / mixed / panel): Spoken presentation with visual storytelling
-- Constraints (room, tech, timing, etc.): Standard conference room, projector with 16:9 aspect ratio, no live demos required, 40 slides total
+- Constraints (room, tech, timing, etc.): Standard conference room, projector with 16:9 aspect ratio, no live demos required, 44 slides total (including opening and feedback images)
 - Expected post-talk action: Attendees implement at least one "micro-practice" (PoC, code review, shadowing) within one quarter; attendees reflect on their own "credibility battery" status
 
 ## Checklist

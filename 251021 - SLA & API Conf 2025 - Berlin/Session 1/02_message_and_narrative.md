@@ -22,8 +22,10 @@ Purpose: define the key idea, takeaways, and story logic.
   - Impact / Outcome: Technical leaders who stay hands-on build credibility that crosses organizational boundaries. They create common language between tech and business, influence strategy through concrete examples, and scale their impact by delegating—not abandoning—technical work. Ultimate goal: create new leaders, make yourself unnecessary.
 
 - Supporting evidence (data, story, demo):
+  - **P&L comparison**: Service company (35% gross margin, 10% EBITDA, people-based COGS) vs Product company (85% gross margin, 15% EBITDA, infrastructure COGS) shows concrete economic difference between business models—makes "translation" concept tangible and visual.
   - **Empathy research**: "Manifestations of Empathy in Software Engineering" shows empathy as act of listening, understanding use cases, mediating between technical and non-technical stakeholders.
-  - **Leadership humility**: John Hennessy's "Leading Matters" includes humility, authenticity, service, empathy as core leadership principles. Modern leadership integrates confidence with recognition of limits and openness to feedback.
+  - **Leadership humility**: Shunryu Suzuki's "Zen Mind, Beginner's Mind" on maintaining openness and beginner's mindset even as expert. Modern leadership integrates confidence with recognition of limits and openness to feedback.
+  - **Servant leadership**: Robert Greenleaf's principle "Good leaders must first become good servants" frames leadership as service rather than imposition.
   - **Shared leadership**: Studies show distributed leadership improves performance, innovation, adaptability. In agile contexts, mature teams require "leadership gap"—delegation that creates space for autonomous initiative.
   - **Practical example from slides**: Refactoring authentication module ("technical debt reduction") → translated to business as "cut client onboarding from 3 days to 4 hours" (faster contract signing).
   - **Trojan-horse PoC examples**: Simple API bridging two isolated databases (later adopted by both teams); dashboard linking uptime/bugs to revenue/NPS (makes technical work visible to leadership); automation removing repetitive manual work (frees time across departments).

@@ -220,7 +220,7 @@
 }
 
 .big-quote {
-    font-size: 2.5em;
+    font-size: 2.2em;
     font-weight: 300;
     line-height: 1.4;
     color: #1a252f;
@@ -424,11 +424,105 @@
     background: #f0f9ff;
     border-color: #3498db;
 }
+
+/* Recording Controls - Hidden by default */
+.recording-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 15px 20px;
+    display: none;
+    align-items: center;
+    gap: 15px;
+    z-index: 100;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.recording-controls.active {
+    display: flex;
+}
+
+.recording-controls button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.recording-controls button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.recording-controls button:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.recording-controls button.recording {
+    background: #e74c3c;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.recording-controls button.stop {
+    background: #e67e22;
+}
+
+.recording-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+.recording-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #95a5a6;
+}
+
+.recording-dot.active {
+    background: #e74c3c;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.timer {
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    min-width: 60px;
+}
     </style>
 </head>
 <body>
     <div class="reveal">
         <div class="slides">
+            <!-- Slide 0: Opening Image -->
+            <section data-background-image="opening_slide.jpg" data-background-size="contain">
+            </section>
+
             <!-- Slide 1: Title -->
             <section>
                 <h1>Leading Without Authority</h1>
@@ -437,19 +531,19 @@
 
             <!-- Slide 2: Opening Hook -->
             <section>
-                <p class="big-quote" style="font-size: 2.5em;">"What happens when your impact<br>no longer shows up<br>in the <span class="emphasis">commit log?</span>"</p>
+                <p class="big-quote">"What happens when your impact<br>no longer shows up<br>in the <span class="emphasis">commit log?</span>"</p>
             </section>
 
             <!-- Slide 3: Opening Context -->
             <section>
                 <p class="big-quote">"In the past decade, I've worked in<br>companies that <span class="emphasis">build products</span><br>and companies that <span class="emphasis">sell services.</span>"</p>
-                <p style="text-align: center; margin-top: 3em; font-size: 1.3em; font-style: italic; color: #7f8c8d;">In both, I saw the same pattern</p>
+                <p style="text-align: center; margin-top: 3em; font-size: 0.95em; font-style: italic; color: #7f8c8d;">In both, I saw the same pattern</p>
             </section>
 
             <!-- Slide 4: The Pattern -->
             <section>
                 <p class="big-quote">The higher you climb,<br>the further from the code</p>
-                <p style="text-align: center; margin-top: 3em; font-size: 1.3em; font-style: italic; color: #7f8c8d;">Harder to know if influence is <span class="emphasis">real or perceived</span></p>
+                <p style="text-align: center; margin-top: 3em; font-size: 1.1em; font-style: italic; color: #7f8c8d;">Harder to know if influence is <span class="emphasis">real or perceived</span></p>
             </section>
 
             <!-- Slide 5: Product vs Services -->
@@ -467,82 +561,197 @@
                 </div>
             </section>
 
-            <!-- Slide 5: Credibility Currency -->
-            <section>
-                <p class="big-quote">"<span class="emphasis">Credibility</span> is the currency<br>that crosses both worlds."</p>
-            </section>
-
             <!-- Slide 6: Replicable Trust -->
             <section>
                 <p class="big-quote">"Technical leadership is about<br><span class="emphasis">replicable trust</span>"</p>
                 <p style="text-align: center; margin-top: 3em; font-size: 1.3em; font-style: italic; color: #7f8c8d;">People seeing what you can do,<br>not just hearing what you say</p>
             </section>
 
-            <!-- Slide 7: Authority vs Power -->
+            <!-- Slide 7: Credibility Currency -->
+            <section>
+                <p class="big-quote">"<span class="emphasis">Credibility</span> is the currency<br>that crosses both worlds."</p>
+            </section>
+
+            <!-- Slide 8: Authority vs Power -->
             <section>
                 <h2>Authority ≠ Power</h2>
                 <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2;">
                     <p style="margin: 1.5em 0;">Authority is often mistaken for power:</p>
                     <p style="margin: 1.5em 0; color: #7f8c8d;">→ Titles, headcount, budget</p>
-                    <p style="margin: 2.5em 0; margin-top: 3em;">In today's hybrid world, <span class="emphasis">formal power matters less</span><br>than <span class="emphasis">tangible contribution.</span></p>
+                    <p class="fragment" style="margin: 2.5em 0; margin-top: 3em;">In today's hybrid world, <span class="emphasis">formal power matters less</span><br>than <span class="emphasis">tangible contribution.</span></p>
                 </div>
             </section>
 
-            <!-- Slide 8: Code Example -->
+            <!-- Slide 9: Code Example -->
             <section>
-                <p class="big-quote">"One line of code that unblocks<br>a cross-functional team<br><br>builds more trust than<br><span class="emphasis">three alignment slides.</span>"</p>
+                <p class="big-quote">"One line of code that unblocks<br>a cross-functional team<br>builds more trust than<br><span class="emphasis">three alignment slides.</span>"</p>
             </section>
 
-            <!-- Slide 9: Anchoring to Reality -->
+            <!-- Slide 10: Anchoring to Reality -->
             <section>
                 <p class="quote-slide">"Writing code doesn't reduce your authority—<br><br>it <span class="emphasis">anchors it to reality.</span>"</p>
             </section>
 
-            <!-- Slide 10: Lesson 1 Title -->
+            <!-- Slide 11: Lesson 1 Title -->
             <section>
                 <h2>Lesson 1</h2>
                 <h3 style="margin-top: 2em;">Understanding different<br><span class="emphasis">languages of value</span></h3>
             </section>
 
-            <!-- Slide 11: Languages of Value -->
+            <!-- Slide 12: Languages of Value -->
             <section>
                 <h2>Different Languages of Value</h2>
                 <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
                     <p style="margin: 1.5em 0;">→ <strong>Product work:</strong> value = innovation and speed</p>
                     <p style="margin: 1.5em 0;">→ <strong>Service work:</strong> value = reliability and client confidence</p>
-                    <p style="margin: 2em 0; padding-top: 1em; border-top: 1px solid #ecf0f1;">→ <strong>Engineers measure:</strong> performance, code elegance</p>
-                    <p style="margin: 1.5em 0;">→ <strong>Business measures:</strong> trust, margins, predictability</p>
+                    <div class="fragment">
+                        <p style="margin: 2em 0; padding-top: 1em; border-top: 1px solid #ecf0f1;">→ <strong>Engineers measure:</strong> performance, code elegance</p>
+                        <p style="margin: 1.5em 0;">→ <strong>Business measures:</strong> trust, margins, predictability</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Slide 12: Translation -->
+            <!-- Slide 13: Service P&L Example -->
+            <section>
+                <h2>Service Company P&L</h2>
+                <div style="margin: 1.5em auto; max-width: 750px; text-align: left; font-size: 0.41em;">
+                    <table style="width: 100%; border-collapse: collapse; font-family: monospace;">
+                        <tr style="background: #e8f4f8; border-bottom: 2px solid #3498db;">
+                            <td style="padding: 0.8em; font-weight: bold;">Revenue (Top Line)</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold;">€10,000,000</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold;">100%</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td style="padding: 0.8em; padding-left: 2em; color: #7f8c8d;">COGS (billable people + infra)</td>
+                            <td style="padding: 0.8em; text-align: right; color: #e74c3c;">€6,500,000</td>
+                            <td style="padding: 0.8em; text-align: right; color: #7f8c8d;">65%</td>
+                        </tr>
+                        <tr class="fragment" style="background: #d5f4e6; border-top: 2px solid #27ae60; border-bottom: 2px solid #27ae60;">
+                            <td style="padding: 0.8em; font-weight: bold;">Gross Margin</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold; color: #27ae60;">€3,500,000</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold; color: #27ae60;">35%</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td style="padding: 0.8em; padding-left: 2em; color: #7f8c8d;">OPEX (sales, admin, overhead)</td>
+                            <td style="padding: 0.8em; text-align: right; color: #e74c3c;">€2,500,000</td>
+                            <td style="padding: 0.8em; text-align: right; color: #7f8c8d;">25%</td>
+                        </tr>
+                        <tr class="fragment" style="background: #fff5e6; border-top: 2px solid #f39c12; border-bottom: 2px solid #f39c12;">
+                            <td style="padding: 0.8em; font-weight: bold;">EBITDA</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold; color: #f39c12;">€1,000,000</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold; color: #f39c12;">10%</td>
+                        </tr>
+                    </table>
+                    <p class="fragment" style="margin-top: 1.5em; font-size: 0.95em; text-align: center; color: #e74c3c; font-style: italic;">
+                        Selling people + markup model
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 14: Product P&L Example -->
+            <section>
+                <h2>Product Company P&L</h2>
+                <div style="margin: 1.5em auto; max-width: 750px; text-align: left; font-size: 0.41em;">
+                    <table style="width: 100%; border-collapse: collapse; font-family: monospace;">
+                        <tr style="background: #e8f4f8; border-bottom: 2px solid #3498db;">
+                            <td style="padding: 0.8em; font-weight: bold;">Revenue (Top Line)</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold;">€10,000,000</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold;">100%</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td style="padding: 0.8em; padding-left: 2em; color: #7f8c8d;">COGS (hosting, support, licenses)</td>
+                            <td style="padding: 0.8em; text-align: right; color: #e74c3c;">€1,500,000</td>
+                            <td style="padding: 0.8em; text-align: right; color: #7f8c8d;">15%</td>
+                        </tr>
+                        <tr class="fragment" style="background: #d5f4e6; border-top: 2px solid #27ae60; border-bottom: 2px solid #27ae60;">
+                            <td style="padding: 0.8em; font-weight: bold;">Gross Margin</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold; color: #27ae60;">€8,500,000</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold; color: #27ae60;">85%</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td style="padding: 0.8em; padding-left: 2em; color: #7f8c8d;">R&D (capitalized development)</td>
+                            <td style="padding: 0.8em; text-align: right; color: #3498db;">€3,500,000</td>
+                            <td style="padding: 0.8em; text-align: right; color: #7f8c8d;">35%</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td style="padding: 0.8em; padding-left: 2em; color: #7f8c8d;">Sales & Marketing</td>
+                            <td style="padding: 0.8em; text-align: right; color: #e74c3c;">€2,500,000</td>
+                            <td style="padding: 0.8em; text-align: right; color: #7f8c8d;">25%</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td style="padding: 0.8em; padding-left: 2em; color: #7f8c8d;">G&A (admin, overhead)</td>
+                            <td style="padding: 0.8em; text-align: right; color: #e74c3c;">€1,000,000</td>
+                            <td style="padding: 0.8em; text-align: right; color: #7f8c8d;">10%</td>
+                        </tr>
+                        <tr class="fragment" style="background: #fff5e6; border-top: 2px solid #f39c12; border-bottom: 2px solid #f39c12;">
+                            <td style="padding: 0.8em; font-weight: bold;">EBITDA</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold; color: #f39c12;">€1,500,000</td>
+                            <td style="padding: 0.8em; text-align: right; font-weight: bold; color: #f39c12;">15%</td>
+                        </tr>
+                    </table>
+                    <p class="fragment" style="margin-top: 1.5em; font-size: 0.95em; text-align: center; color: #27ae60; font-style: italic;">
+                        High gross margin + R&D investment + scalability
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 15: Key Differences -->
+            <section>
+                <h2>Two Different Economic Models</h2>
+                <div class="comparison" style="margin-top: 1.5em;">
+                    <div class="before">
+                        <h4>Service Company</h4>
+                        <p style="font-size: 0.65em; margin-top: 1.2em; line-height: 1.6;">
+                            • Gross Margin: <strong>35%</strong><br>
+                            • EBITDA: <strong>10%</strong><br>
+                            • COGS = people costs<br>
+                            • Linear scaling<br>
+                            • Margin focus
+                        </p>
+                    </div>
+                    <div class="after">
+                        <h4>Product Company</h4>
+                        <p style="font-size: 0.65em; margin-top: 1.2em; line-height: 1.6;">
+                            • Gross Margin: <strong>85%</strong><br>
+                            • EBITDA: <strong>15%</strong><br>
+                            • COGS = infrastructure<br>
+                            • Exponential scaling<br>
+                            • Growth focus
+                        </p>
+                    </div>
+                </div>
+                <p class="fragment" style="text-align: center; margin-top: 1.5em; font-size: 0.9em; color: #3498db;">
+                    <strong>As a technologist, understanding both models changes how you communicate value</strong>
+                </p>
+            </section>
+
+            <!-- Slide 16: Translation -->
             <section>
                 <p class="big-quote">"You don't have to abandon<br>the technical language—<br><br>you have to <span class="emphasis">translate it.</span>"</p>
             </section>
 
-            <!-- Slide 13: Carl Rogers Quote -->
+            <!-- Slide 17: Empathy Quote -->
             <section>
                 <p class="quote-slide">"Empathy is not agreement;<br>it's <span class="emphasis">understanding.</span>"</p>
-                <p style="text-align: center; margin-top: 2em; color: #7f8c8d; font-size: 0.7em;">— Carl Rogers</p>
             </section>
 
-            <!-- Slide 14: Building the Bridge -->
+            <!-- Slide 18: Building the Bridge -->
             <section>
                 <h2>Building the Bridge</h2>
-                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
+                <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.75em; line-height: 1.8;">
                     <p style="margin: 1.5em 0;">For technologists, empathy isn't asking the business to understand our systems.</p>
-                    <p style="margin: 2em 0; font-size: 1.1em;"><span class="emphasis">It's building the bridge in their language</span><br>—even when they don't speak ours.</p>
-                    <p style="margin: 2em 0; font-style: italic; color: #7f8c8d;">An act of humility, not submission</p>
+                    <p style="margin: 2em 0; font-size: 1.05em;"><span class="emphasis">It's building the bridge in their language</span><br>—even when they don't speak ours.</p>
+                    <p class="fragment" style="margin: 2em 0; font-style: italic; color: #7f8c8d;">An act of humility, not submission</p>
                 </div>
             </section>
 
-            <!-- Slide 15: Servant Leadership -->
+            <!-- Slide 19: Servant Leadership -->
             <section>
-                <p class="quote-slide">"Lead by <span class="emphasis">serving</span>,<br>not imposing."</p>
-                <p style="text-align: center; margin-top: 2em; color: #7f8c8d; font-size: 0.7em;">— Robert Greenleaf, Servant Leadership</p>
+                <p class="quote-slide">"Good leaders must first become<br>good <span class="emphasis">servants.</span>"</p>
+                <p style="text-align: center; margin-top: 2em; color: #7f8c8d; font-size: 0.7em;">— Robert Greenleaf</p>
             </section>
 
-            <!-- Slide 16: Practical Example -->
+            <!-- Slide 20: Practical Example -->
             <section>
                 <h2>Example: Speaking Their Language</h2>
                 <div class="comparison">
@@ -558,13 +767,13 @@
                 <p style="text-align: center; margin-top: 2em; font-size: 1em; font-style: italic; color: #7f8c8d;">Same work, different language</p>
             </section>
 
-            <!-- Slide 17: Lesson 2 Title -->
+            <!-- Slide 21: Lesson 2 Title -->
             <section>
                 <h2>Lesson 2</h2>
                 <h3 style="margin-top: 2em;">Staying credible as an<br><span class="emphasis">individual contributor</span></h3>
             </section>
 
-            <!-- Slide 18: Two Kinds of Power -->
+            <!-- Slide 22: Two Kinds of Power -->
             <section>
                 <h2>Two Kinds of Power</h2>
                 <div style="display: flex; justify-content: center; gap: 4em; margin: 3em 0;">
@@ -581,30 +790,26 @@
                 <p style="text-align: center; margin-top: 3em; font-size: 1.2em; font-style: italic; color: #7f8c8d;">The first is given. The second is earned.</p>
             </section>
 
-            <!-- Slide 19: Reputation Fades -->
-            <section>
-                <p class="big-quote">"Stop building,<br>and your technical reputation<br><span class="emphasis">fades fast.</span>"</p>
-                <p style="text-align: center; margin-top: 3em; font-size: 1.2em; font-style: italic; color: #7f8c8d;">Technical credibility is a battery—<br>recharge it in the field</p>
-            </section>
-
-            <!-- Slide 20: Suzuki Quote -->
+            <!-- Slide 23: Suzuki Quote -->
             <section>
                 <p class="quote-slide">"In the beginner's mind there are many possibilities,<br>but in the expert's there are <span class="emphasis">few.</span>"</p>
                 <p style="text-align: center; margin-top: 2em; color: #7f8c8d; font-size: 0.7em;">— Shunryu Suzuki</p>
             </section>
 
-            <!-- Slide 21: Humility -->
+            <!-- Slide 24: Humility -->
             <section>
                 <h2>Humility as a Practice</h2>
                 <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
                     <p style="margin: 1.5em 0;">Humility doesn't mean <span style="color: #7f8c8d;">hiding your skill</span>—</p>
                     <p style="margin: 1.5em 0; font-size: 1.1em;">it means <span class="emphasis">using it to understand others better.</span></p>
-                    <p style="margin: 2.5em 0; padding-top: 1.5em; border-top: 1px solid #ecf0f1;">It's the antidote to technical arrogance:</p>
-                    <p style="margin: 1.5em 0; font-style: italic; color: #3498db;">Not having the last word,<br>but asking the <span class="emphasis">right first question.</span></p>
+                    <div class="fragment">
+                        <p style="margin: 2.5em 0; padding-top: 1.5em; border-top: 1px solid #ecf0f1;">It's the antidote to technical arrogance:</p>
+                        <p style="margin: 1.5em 0; font-style: italic; color: #3498db;">Not having the last word,<br>but asking the <span class="emphasis">right first question.</span></p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Slide 22: Micro-practices -->
+            <!-- Slide 25: Micro-practices -->
             <section>
                 <h2>Micro-practices</h2>
                 <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2.2;">
@@ -615,19 +820,25 @@
                 <p style="text-align: center; margin-top: 3em; font-size: 1.1em; font-style: italic; color: #7f8c8d;">Small actions, sustained credibility</p>
             </section>
 
-            <!-- Slide 23: Lesson 3 Title -->
+            <!-- Slide 26: Reputation Fades -->
+            <section>
+                <p class="big-quote">"Stop building,<br>and your technical reputation<br><span class="emphasis">fades fast.</span>"</p>
+                <p style="text-align: center; margin-top: 3em; font-size: 1.2em; font-style: italic; color: #7f8c8d;">Technical credibility is a battery—<br>recharge it in the field</p>
+            </section>
+
+            <!-- Slide 27: Lesson 3 Title -->
             <section>
                 <h2>Lesson 3</h2>
                 <h3 style="margin-top: 2em;">Using small wins as<br><span class="emphasis">strategic leverage</span></h3>
             </section>
 
-            <!-- Slide 24: Technical Persuasion -->
+            <!-- Slide 28: Technical Persuasion -->
             <section>
                 <p class="big-quote">"The best way to influence<br>without authority is through<br><span class="emphasis">concrete examples</span><br>that speak for themselves."</p>
                 <p style="text-align: center; margin-top: 3em; font-size: 1.2em; font-style: italic; color: #7f8c8d;">Proof-of-concepts are the modern form<br>of technical persuasion</p>
             </section>
 
-            <!-- Slide 25: Small Win Examples -->
+            <!-- Slide 29: Small Win Examples -->
             <section>
                 <h2>Small Wins in Action</h2>
                 <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
@@ -638,12 +849,7 @@
                 <p style="text-align: center; margin-top: 3em; font-size: 1em; font-style: italic; color: #7f8c8d;">Start small, prove value, scale impact</p>
             </section>
 
-            <!-- Slide 26: Reducing the Gap -->
-            <section>
-                <p class="quote-slide">"Each visible result reduces the gap<br>between those who <span class="emphasis">decide</span><br>and those who <span class="emphasis">deliver.</span>"</p>
-            </section>
-
-            <!-- Slide 27: What is a Trojan-horse PoC -->
+            <!-- Slide 30: What is a Trojan-horse PoC -->
             <section>
                 <h2>The Trojan-horse PoC</h2>
                 <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2.2;">
@@ -653,12 +859,7 @@
                 </div>
             </section>
 
-            <!-- Slide 28: Committee Approval -->
-            <section>
-                <p class="big-quote" style="font-size: 2.2em;">"You don't need a committee's approval<br>to change how people see technology.<br><br>You need <span class="emphasis">one example</span><br>that works."</p>
-            </section>
-
-            <!-- Slide 29: Practical Examples -->
+            <!-- Slide 31: Practical Examples -->
             <section>
                 <h2>Practical Examples</h2>
                 <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.8em; line-height: 1.8;">
@@ -668,12 +869,12 @@
                 </div>
             </section>
 
-            <!-- Slide 30: Common Language -->
+            <!-- Slide 32: Common Language -->
             <section>
-                <p class="quote-slide" style="font-size: 1.8em;">"Each PoC becomes a<br><span class="emphasis">common language.</span><br><br>It doesn't explain—it shows.<br><br>It's the most credible<br>form of strategy."</p>
+                <p class="quote-slide" style="font-size: 1.5em;">"Each PoC becomes a<br><span class="emphasis">common language.</span><br><br>It doesn't explain—it shows.<br><br>It's the most credible<br>form of strategy."</p>
             </section>
 
-            <!-- Slide 31: How to Build It -->
+            <!-- Slide 33: How to Build It -->
             <section>
                 <h2>How to Build It</h2>
                 <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
@@ -684,24 +885,24 @@
                 </div>
             </section>
 
-            <!-- Slide 32: Leadership Goal -->
+            <!-- Slide 34: Leadership Goal -->
             <section>
-                <p class="big-quote">"Leadership goal:<br><br>Create new leaders,<br>make yourself <span class="emphasis">unnecessary.</span>"</p>
+                <p class="big-quote">"Create new leaders,<br>make yourself <span class="emphasis">unnecessary.</span>"</p>
             </section>
 
-            <!-- Slide 33: Practical Application - Intro -->
+            <!-- Slide 35: Practical Application - Intro -->
             <section>
                 <h2>Putting It All Together</h2>
                 <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.9em; line-height: 2;">
                     <p style="margin: 1.5em 0;">We've covered three ideas:</p>
-                    <p style="margin: 1.5em 0; padding-left: 1.5em;">→ <span class="emphasis">Maintaining credibility</span> as an individual contributor</p>
-                    <p style="margin: 1.5em 0; padding-left: 1.5em;">→ <span class="emphasis">Translating</span> the language of value</p>
-                    <p style="margin: 1.5em 0; padding-left: 1.5em;">→ Using <span class="emphasis">small examples</span> to influence strategy</p>
-                    <p style="margin: 2.5em 0; margin-top: 3em; text-align: center; font-style: italic;">Let's close with how to apply these daily</p>
+                    <p class="fragment" style="margin: 1.5em 0; padding-left: 1.5em;">→ <span class="emphasis">Maintaining credibility</span> as an individual contributor</p>
+                    <p class="fragment" style="margin: 1.5em 0; padding-left: 1.5em;">→ <span class="emphasis">Translating</span> the language of value</p>
+                    <p class="fragment" style="margin: 1.5em 0; padding-left: 1.5em;">→ Using <span class="emphasis">small examples</span> to influence strategy</p>
+                    <p class="fragment" style="margin: 2.5em 0; margin-top: 3em; text-align: center; font-style: italic;">Let's close with how to apply these daily</p>
                 </div>
             </section>
 
-            <!-- Slide 34: Operational Framework -->
+            <!-- Slide 36: Operational Framework -->
             <section>
                 <h2>Three Steps to Influence Without Authority</h2>
                 <div style="margin: 2.5em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
@@ -711,12 +912,12 @@
                 </div>
             </section>
 
-            <!-- Slide 35: Code as Leadership Tool -->
+            <!-- Slide 37: Code as Leadership Tool -->
             <section>
                 <p class="big-quote">"Every technical action should echo<br>in the language of business.<br><br>That's how code becomes<br>a <span class="emphasis">leadership tool.</span>"</p>
             </section>
 
-            <!-- Slide 36: Product-Style Listening -->
+            <!-- Slide 38: Product-Style Listening -->
             <section>
                 <h2>Listen Like a Product Manager</h2>
                 <div style="margin: 3em auto; max-width: 900px; text-align: left; font-size: 0.85em; line-height: 2;">
@@ -726,35 +927,56 @@
                 </div>
             </section>
 
-            <!-- Slide 37: Batman Quote -->
+            <!-- Slide 39: Batman Quote -->
             <section>
                 <p class="quote-slide">"He's not the hero Gotham deserves,<br>but the one it <span class="emphasis">needs</span> right now."</p>
                 <p style="text-align: center; margin-top: 2em; color: #7f8c8d; font-size: 0.7em;">— Batman, Christopher Nolan (adapted)</p>
             </section>
 
-            <!-- Slide 38: Mental Exercise -->
+            <!-- Slide 40: Call to Action -->
             <section>
-                <h2>A Mental Exercise</h2>
-                <div style="margin: 3em auto; max-width: 900px; text-align: center; font-size: 0.9em; line-height: 2;">
-                    <p style="margin: 2em 0; font-size: 1.1em;">"If tomorrow you could build <span class="emphasis">one PoC</span><br>to align two teams that never talk,<br><br>what would it be?</p>
-                    <p style="margin: 3em 0; margin-top: 4em; color: #7f8c8d; font-style: italic;">How long would it take to show its value?"</p>
+                <p class="big-quote" style="font-size: 1.8em;">"What's the smallest thing you could build<br>this week that would make you<br><span class="emphasis">harder to ignore?</span>"</p>
+                <div style="margin-top: 2.5em;">
+                    <p class="fragment" style="text-align: center; font-size: 1em; line-height: 1.5; color: #2c3e50;">"Your impact won't show up<br>in the commit log anymore—</p>
+                    <p class="fragment" style="text-align: center; font-size: 1em; line-height: 1.5; color: #2c3e50; margin-top: 0.5em;">but your <span class="emphasis">credibility</span> still can."</p>
+                    <p class="fragment" style="text-align: center; margin-top: 1.5em; font-size: 0.9em; font-style: italic; color: #7f8c8d;">One PoC. One week. Visible value.</p>
                 </div>
             </section>
 
-            <!-- Slide 39: Closing -->
+            <!-- Slide 41: Closing -->
             <section>
                 <div style="margin: 3em auto; max-width: 900px; text-align: center;">
-                    <p style="font-size: 1.3em; line-height: 1.8; margin: 2em 0;">"Technical leadership isn't about<br>leaving code for strategy—<br><br>it's about bringing <span class="emphasis">strategy into the code.</span>"</p>
-                    <p style="margin: 3em 0; margin-top: 4em; font-style: italic; color: #7f8c8d;">Staying hands-on isn't a limitation;<br>it's the most reliable way to stay credible.</p>
+                    <p style="font-size: 1.3em; line-height: 1.8; margin: 2em 0;">"Technical leadership isn't choosing<br>between code and strategy—<br><br>it's using <span class="emphasis">technical credibility</span><br>to influence both."</p>
                 </div>
             </section>
 
-            <!-- Slide 40: Final Message -->
+            <!-- Slide 42: Final Message -->
             <section>
-                <p class="big-quote" style="font-size: 3em;">"Stay <span class="emphasis">technical</span><br>to stay <span class="emphasis">credible.</span>"</p>
+                <p class="big-quote">"Stay <span class="emphasis">technical</span><br>to stay <span class="emphasis">credible.</span>"</p>
+            </section>
+
+            <!-- Slide 43: Feedback Image -->
+            <section data-background-image="feedback_slide.jpg" data-background-size="contain">
             </section>
 
         </div>
+    </div>
+
+    <!-- Recording Controls (shown only with ?recording=true) -->
+    <div class="recording-controls" id="recordingControls">
+        <button id="startRecording" onclick="startRecording()">
+            🎙 Start Recording
+        </button>
+        <button id="stopRecording" onclick="stopRecording()" disabled class="stop">
+            ⏹ Stop
+        </button>
+        <div class="recording-indicator">
+            <div class="recording-dot" id="recordingDot"></div>
+            <span class="timer" id="timer">00:00</span>
+        </div>
+        <button id="downloadData" onclick="downloadRecordingData()" disabled>
+            💾 Export Data
+        </button>
     </div>
 
     <!-- Quick navigation menu -->
@@ -847,6 +1069,249 @@
         function toggleOverview() {
             Reveal.toggleOverview();
             document.getElementById('navMenu').classList.remove('active');
+        }
+
+        // ========================================
+        // RECORDING FEATURE
+        // Activated with ?recording=true parameter
+        // ========================================
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const recordingEnabled = urlParams.get('recording') === 'true';
+
+        if (recordingEnabled) {
+            document.getElementById('recordingControls').classList.add('active');
+            console.log('Recording mode enabled. Use controls at bottom-left.');
+        }
+
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let slideTimeline = [];
+        let recordingStartTime = null;
+        let currentSlideStartTime = null;
+        let timerInterval = null;
+
+        if (recordingEnabled) {
+            Reveal.on('slidechanged', event => {
+                if (mediaRecorder && mediaRecorder.state === 'recording') {
+                    const now = Date.now();
+                    const slideNumber = Reveal.getIndices();
+                    const timeInPresentation = now - recordingStartTime;
+
+                    if (currentSlideStartTime !== null) {
+                        const previousSlide = slideTimeline[slideTimeline.length - 1];
+                        if (previousSlide) {
+                            previousSlide.duration = timeInPresentation - currentSlideStartTime;
+                        }
+                    }
+
+                    slideTimeline.push({
+                        slideNumber: slideNumber.h + 1,
+                        timestamp: timeInPresentation,
+                        duration: null,
+                        slideTitle: getSlideTitle(event.currentSlide)
+                    });
+
+                    currentSlideStartTime = timeInPresentation;
+                }
+            });
+        }
+
+        function getSlideTitle(slideElement) {
+            const h1 = slideElement.querySelector('h1');
+            const h2 = slideElement.querySelector('h2');
+            const quote = slideElement.querySelector('.big-quote, .quote-slide');
+
+            if (h1) return h1.textContent.trim();
+            if (h2) return h2.textContent.trim();
+            if (quote) return quote.textContent.trim().substring(0, 50) + '...';
+            return `Slide ${Reveal.getIndices().h + 1}`;
+        }
+
+        async function startRecording() {
+            if (!recordingEnabled) return;
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+                mediaRecorder = new MediaRecorder(stream, {
+                    mimeType: 'audio/webm;codecs=opus'
+                });
+
+                audioChunks = [];
+                slideTimeline = [];
+                recordingStartTime = Date.now();
+                currentSlideStartTime = 0;
+
+                const slideNumber = Reveal.getIndices();
+                slideTimeline.push({
+                    slideNumber: slideNumber.h + 1,
+                    timestamp: 0,
+                    duration: null,
+                    slideTitle: getSlideTitle(Reveal.getCurrentSlide())
+                });
+
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = () => {
+                    const lastSlide = slideTimeline[slideTimeline.length - 1];
+                    if (lastSlide) {
+                        lastSlide.duration = Date.now() - recordingStartTime - currentSlideStartTime;
+                    }
+                    document.getElementById('downloadData').disabled = false;
+                };
+
+                mediaRecorder.start();
+
+                document.getElementById('startRecording').disabled = true;
+                document.getElementById('stopRecording').disabled = false;
+                document.getElementById('startRecording').classList.add('recording');
+                document.getElementById('recordingDot').classList.add('active');
+
+                startTimer();
+                console.log('Recording started');
+            } catch (err) {
+                console.error('Error accessing microphone:', err);
+                alert('Could not access microphone. Please grant permission and try again.');
+            }
+        }
+
+        function stopRecording() {
+            if (!recordingEnabled || !mediaRecorder) return;
+
+            if (mediaRecorder.state === 'recording') {
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+
+                document.getElementById('startRecording').disabled = false;
+                document.getElementById('stopRecording').disabled = true;
+                document.getElementById('startRecording').classList.remove('recording');
+                document.getElementById('recordingDot').classList.remove('active');
+
+                stopTimer();
+                console.log('Recording stopped');
+            }
+        }
+
+        function startTimer() {
+            let seconds = 0;
+            timerInterval = setInterval(() => {
+                seconds++;
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                document.getElementById('timer').textContent =
+                    `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function downloadRecordingData() {
+            if (!recordingEnabled) return;
+
+            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+            const audioUrl = URL.createObjectURL(audioBlob);
+            const audioLink = document.createElement('a');
+            audioLink.href = audioUrl;
+            audioLink.download = `presentation-audio-${Date.now()}.webm`;
+            audioLink.click();
+
+            const timelineData = {
+                metadata: {
+                    totalDuration: slideTimeline.reduce((sum, slide) => sum + (slide.duration || 0), 0),
+                    totalSlides: slideTimeline.length,
+                    recordingDate: new Date().toISOString(),
+                    presentationTitle: document.title
+                },
+                slides: slideTimeline.map(slide => ({
+                    ...slide,
+                    timestampFormatted: formatTime(slide.timestamp),
+                    durationFormatted: formatTime(slide.duration)
+                }))
+            };
+
+            const jsonBlob = new Blob([JSON.stringify(timelineData, null, 2)], { type: 'application/json' });
+            const jsonUrl = URL.createObjectURL(jsonBlob);
+            const jsonLink = document.createElement('a');
+            jsonLink.href = jsonUrl;
+            jsonLink.download = `presentation-timeline-${Date.now()}.json`;
+            jsonLink.click();
+
+            const markdown = generateMarkdownReport(timelineData);
+            const mdBlob = new Blob([markdown], { type: 'text/markdown' });
+            const mdUrl = URL.createObjectURL(mdBlob);
+            const mdLink = document.createElement('a');
+            mdLink.href = mdUrl;
+            mdLink.download = `presentation-report-${Date.now()}.md`;
+            mdLink.click();
+
+            console.log('All data downloaded');
+        }
+
+        function formatTime(ms) {
+            if (ms === null) return 'N/A';
+            const totalSeconds = Math.floor(ms / 1000);
+            const mins = Math.floor(totalSeconds / 60);
+            const secs = totalSeconds % 60;
+            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function generateMarkdownReport(data) {
+            let md = `# Presentation Delivery Report\n\n`;
+            md += `**Date**: ${new Date(data.metadata.recordingDate).toLocaleString()}\n`;
+            md += `**Title**: ${data.metadata.presentationTitle}\n`;
+            md += `**Total Duration**: ${formatTime(data.metadata.totalDuration)}\n`;
+            md += `**Total Slides**: ${data.metadata.totalSlides}\n\n`;
+
+            md += `## Slide Timing Breakdown\n\n`;
+            md += `| Slide # | Title | Time on Slide | Timestamp |\n`;
+            md += `|---------|-------|---------------|------------|\n`;
+
+            data.slides.forEach(slide => {
+                md += `| ${slide.slideNumber} | ${slide.slideTitle} | ${slide.durationFormatted} | ${slide.timestampFormatted} |\n`;
+            });
+
+            md += `\n## Statistics\n\n`;
+            const avgDuration = data.metadata.totalDuration / data.metadata.totalSlides;
+            md += `- **Average time per slide**: ${formatTime(avgDuration)}\n`;
+
+            const durations = data.slides.map(s => s.duration).filter(d => d !== null);
+            if (durations.length > 0) {
+                const maxDuration = Math.max(...durations);
+                const maxSlide = data.slides.find(s => s.duration === maxDuration);
+                md += `- **Longest slide**: Slide ${maxSlide.slideNumber} (${formatTime(maxDuration)})\n`;
+
+                const minDuration = Math.min(...durations);
+                const minSlide = data.slides.find(s => s.duration === minDuration);
+                md += `- **Shortest slide**: Slide ${minSlide.slideNumber} (${formatTime(minDuration)})\n`;
+            }
+
+            md += `\n## AI Analysis Prompt\n\n`;
+            md += `\`\`\`\n`;
+            md += `Please analyze this presentation delivery:\n\n`;
+            md += `1. Review the audio file for:\n`;
+            md += `   - Pacing and rhythm\n`;
+            md += `   - Clarity and articulation\n`;
+            md += `   - Pauses and emphasis\n`;
+            md += `   - Filler words (um, uh, like)\n\n`;
+            md += `2. Review the timeline for:\n`;
+            md += `   - Time distribution across slides\n`;
+            md += `   - Slides that were rushed or too slow\n`;
+            md += `   - Overall pacing consistency\n\n`;
+            md += `3. Provide specific feedback on:\n`;
+            md += `   - Which slides need more/less time\n`;
+            md += `   - Moments where delivery could be improved\n`;
+            md += `   - Overall presentation flow\n`;
+            md += `\`\`\`\n`;
+
+            return md;
         }
     </script>
 </body>
