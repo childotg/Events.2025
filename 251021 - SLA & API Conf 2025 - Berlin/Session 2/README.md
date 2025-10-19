@@ -4,12 +4,16 @@ This folder contains a structured template for creating technical talks with Rev
 
 ## Purpose
 
-This template helps you systematically plan, design, and deliver technical presentations by breaking down the process into four key phases:
+This template helps you systematically plan, design, and deliver technical presentations by breaking down the process into **five key phases** plus human review:
 
 1. **Identity** - Define context, audience, and constraints
 2. **Message & Narrative** - Craft core message and story arc
 3. **Outline** - Structure content and timing
 4. **Delivery** - Prepare speaker notes and operational details
+5. **Talk Script** - Write the full talk narrative before slides
+6. **Slides Creation** - Build Reveal.js slides from planning docs
+7. **Human Review** - 1x1 slide review and iteration
+8. **Retroaction** - Update planning docs with final changes
 
 ## Structure
 
@@ -19,17 +23,19 @@ template/
 ├── 02_message_and_narrative.md # Core message and story
 ├── 03_outline.md               # Content structure and timing
 ├── 04_delivery.md              # Speaker notes and delivery guide
+├── 05_talk.md                  # Full talk script (NEW)
 ├── slides/
 │   └── index.html              # Reveal.js slide template
 ├── utils.sh                    # Utility scripts (PDF generation, etc.)
+├── CLAUDE.md                   # AI collaboration guide
 └── README.md                   # This file
 ```
 
 ## How to Use
 
-### 1. Planning Phase (Markdown Files)
+### 1. Planning Phase (5 Markdown Files)
 
-Work through the planning documents in order:
+**Work through the planning documents sequentially:**
 
 **Step 1: Identity** (`01_identity.md`)
 - Fill in talk title, duration, event context
@@ -58,9 +64,22 @@ Work through the planning documents in order:
 - Prepare backup plans for demos or timing issues
 - **Checklist:** Hook relevant, 2-4 bullets per section, clear CTA
 
+**Step 5: Talk Script** (`05_talk.md`) ← **NEW**
+- Write the full talk as you would deliver it
+- Expand outline into complete narrative with transitions
+- Include all quotes, examples, and key phrases
+- Time estimates per section (based on 04_delivery.md)
+- **Purpose:** Having the complete talk written BEFORE slides ensures message clarity and flow
+- **Checklist:** Talk flows naturally, all sections connected, timing realistic
+
 ### 2. Slide Creation (`slides/index.html`)
 
 The template includes a single-file Reveal.js presentation with:
+
+**🎙 NEW: Recording Feature**
+- Add `?recording=true` to URL to enable audio recording + slide timing
+- Perfect for practice runs and AI-assisted delivery feedback
+- See [QUICKSTART_RECORDING.md](QUICKSTART_RECORDING.md) or [RECORDING_FEATURE.md](RECORDING_FEATURE.md)
 
 **Features:**
 - ✅ 16:9 aspect ratio (1920x1080)
@@ -68,6 +87,7 @@ The template includes a single-file Reveal.js presentation with:
 - ✅ Click-to-toggle navigation menu (jump to first/last, overview mode, go to slide number)
 - ✅ Keyboard navigation (arrows, space, page up/down)
 - ✅ Pre-defined CSS classes for common layouts
+- ✅ Integrated recording system (activate with `?recording=true`)
 
 **Included Example Slides:**
 1. **Title Slide** - Standard title + subtitle layout
@@ -105,7 +125,56 @@ The template includes a single-file Reveal.js presentation with:
 
 4. **Style adjustments:** All CSS is in the `<style>` block (lines 12-176)
 
-### 3. Development Workflow
+**Build slides from planning docs (01-05):**
+- Use 05_talk.md as primary source for narrative flow
+- One idea per slide (if more than 3 concepts, split)
+- Prefer visual formats (big-quote, comparison) over bullet lists
+- Add fragments (`.fragment` class) for progressive reveal where needed
+- Test readability on projector-size screen
+
+### 3. Human Review & Iteration
+
+**CRITICAL: Do not skip this phase**
+
+After initial slides are created, conduct 1x1 review:
+
+1. **Slide-by-slide review:**
+   - Check message clarity (is the point obvious?)
+   - Verify font sizes (no overflow, readable from back of room)
+   - Test fragments (do they enhance or distract?)
+   - Validate quotes (are attributions accurate?)
+
+2. **Common issues to catch:**
+   - Text overflow (reduce font size or split slide)
+   - Too many concepts on one slide
+   - Missing transitions between sections
+   - Incorrect or missing quote attributions
+   - Slide numbering gaps or duplicates
+
+3. **Iterative refinement:**
+   - Add/remove slides as needed
+   - Adjust font sizes for readability
+   - Reorder slides for better flow
+   - Add or modify fragments for pacing
+
+### 4. Retroaction (Update Planning Docs)
+
+**After human review and slide finalization:**
+
+Update all 5 planning documents to reflect final changes:
+
+- **01_identity.md**: Update final slide count
+- **02_message_and_narrative.md**: Add any new evidence/examples, fix quote attributions
+- **03_outline.md**: Update slide ranges, add fragment notes, remove deleted slides
+- **04_delivery.md**: Update speaker notes for modified slides, fix quote pauses
+- **05_talk.md**: Align talk script with final slide content and messaging
+
+**Why retroaction matters:**
+- Planning docs become single source of truth for future iterations
+- Next time you present, docs accurately reflect what works
+- Enables consistent delivery across multiple presentations
+
+### 5. Development Workflow
 
 **Option A: Open directly in browser**
 - Works for single-file HTML

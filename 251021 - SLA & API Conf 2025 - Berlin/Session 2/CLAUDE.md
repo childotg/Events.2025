@@ -2,6 +2,18 @@
 
 This document helps Claude (and other AI assistants) understand the project structure, workflow, and how to effectively collaborate on technical presentations.
 
+## IMPORTANT: Git Commit Policy
+
+**NEVER mention Claude Code, Claude, or AI assistance in git commits or any tracked files.**
+
+When creating commits:
+- Do NOT add "🤖 Generated with Claude Code" footers
+- Do NOT add "Co-Authored-By: Claude" attributions
+- Write commits as if they were made directly by the user
+- Keep commit messages professional and factual
+
+This repository should contain no trace of AI assistance in version control history.
+
 ## Quick Start for New Sessions
 
 When starting a new conversation, Claude should:
@@ -21,8 +33,9 @@ User: "I need to create a technical talk"
 Claude should:
 1. Read CLAUDE.md (this file)
 2. Read README.md for full context
-3. Guide through 4-phase planning process
+3. Guide through 5-phase planning process (01-05 .md files)
 4. Ask: "Let's start with the Identity phase. What's your talk about?"
+5. After completing 01-04, ask: "Should I draft the full talk script (05_talk.md) before we create slides?"
 ```
 
 ### Resume Existing Work
@@ -33,10 +46,24 @@ If files are partially completed:
 User: "Continue working on my presentation"
 
 Claude should:
-1. Read all 4 planning docs (01-04 .md files)
+1. Read all 5 planning docs (01-05 .md files)
 2. Check slides/index.html for existing content
 3. Summarize current state
 4. Ask: "I see you've completed X and Y. Want to continue with Z?"
+```
+
+### After Slides Are Created
+
+**IMPORTANT**: Human review phase is mandatory
+
+```
+User: "Let's review the slides"
+
+Claude should:
+1. Read slides/index.html to understand current state
+2. Be prepared for iterative feedback (font sizes, reordering, content changes)
+3. Make requested changes immediately
+4. After all changes are final, ask: "Should I update the planning docs (01-05) to reflect the final slides?"
 ```
 
 ## Project Structure
@@ -49,17 +76,55 @@ template/
 ├── 02_message_and_narrative.md # Phase 2: Core message
 ├── 03_outline.md               # Phase 3: Content structure
 ├── 04_delivery.md              # Phase 4: Speaker notes
+├── 05_talk.md                  # Phase 5: Full talk script (NEW)
 ├── slides/
 │   └── index.html              # Reveal.js presentation (single-file)
 └── utils.sh                    # Utility scripts (PDF, validation)
 ```
 
+## Workflow Overview
+
+```
+┌─────────────────────────────────────────────────────────┐
+│ PHASE 1-5: Planning (Markdown Files)                   │
+├─────────────────────────────────────────────────────────┤
+│ 01_identity.md → 02_message.md → 03_outline.md →       │
+│ 04_delivery.md → 05_talk.md                            │
+└─────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────┐
+│ PHASE 6: Slides Creation (from 01-05)                  │
+├─────────────────────────────────────────────────────────┤
+│ Build slides/index.html using 05_talk.md as primary    │
+│ source for narrative flow and content                  │
+└─────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────┐
+│ PHASE 7: Human Review (MANDATORY)                      │
+├─────────────────────────────────────────────────────────┤
+│ User reviews slides 1x1, provides iterative feedback   │
+│ - Font size adjustments                                │
+│ - Content modifications                                │
+│ - Slide reordering                                     │
+│ - Quote verification                                   │
+│ - Fragment additions                                   │
+└─────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────┐
+│ PHASE 8: Retroaction (Update Planning Docs)            │
+├─────────────────────────────────────────────────────────┤
+│ Update 01-05 .md files to reflect final slide changes  │
+│ Planning docs = single source of truth                 │
+└─────────────────────────────────────────────────────────┘
+```
+
 ## Template Philosophy
 
-### Two-Track Approach
+### Five-Phase Planning Approach
 
-**Track 1: Planning (Markdown files)**
+**Track 1: Planning (5 Markdown files)**
 - Systematic preparation before creating slides
+- Phase 5 (05_talk.md) is NEW and CRITICAL
 - Four sequential phases with checklists
 - Ensures clarity of message and structure
 - User fills TODO markers in each file
@@ -94,10 +159,12 @@ template/
 - Too broad audience ("anyone interested in tech")
 - Unmeasurable objective ("learn about...")
 - Missing constraints (room size, tech available)
+- Language not specified (English, Italian, German, etc.)
 
 **Checklist before moving to Phase 2:**
 - [ ] Objective is measurable and specific
 - [ ] Audience has clear role and seniority
+- [ ] Language specified
 - [ ] Format matches goal
 - [ ] Constraints identified
 
@@ -344,7 +411,7 @@ Use provided classes for common patterns:
 
 ## Common Workflows
 
-### Workflow 1: From Scratch
+### Workflow 1: From Scratch (UPDATED PROCESS)
 
 ```
 1. User: "I need to create a 45-min talk on [topic]"
@@ -359,15 +426,32 @@ Use provided classes for common patterns:
 
 4. Complete Phase 3 → Validate checklist → Move to Phase 4
 
-5. Complete Phase 4 → Start creating slides
+5. Complete Phase 4 → Validate checklist → Move to Phase 5
 
-6. For each section in outline:
-   - Create 3-5 slides
-   - Follow one-idea-per-slide rule
-   - Use provided CSS classes
-   - Test readability
+6. **NEW: Complete Phase 5 (05_talk.md)**
+   - Write full talk script based on 01-04
+   - Include all narrative, quotes, examples
+   - Validate timing with word count
+   - Read aloud test
 
-7. Generate PDF: ./utils.sh pdf slides/index.html output.pdf
+7. Start creating slides FROM 05_talk.md
+   - Use talk script as primary source
+   - One idea per slide
+   - Follow visual-first principles
+   - Add fragments for pacing
+
+8. **MANDATORY: Human review phase**
+   - User reviews slides 1x1
+   - Make iterative changes
+   - Adjust fonts, content, ordering
+   - Verify quotes
+
+9. **CRITICAL: Retroaction phase**
+   - Update 01-05 .md files with final changes
+   - Ensure planning docs match final slides
+   - Planning docs = single source of truth
+
+10. Generate PDF: ./utils.sh pdf slides/index.html output.pdf
 ```
 
 ### Workflow 2: Review Existing Work
@@ -375,7 +459,7 @@ Use provided classes for common patterns:
 ```
 1. User: "Review my planning docs"
    Claude:
-   - Read all 4 .md files
+   - Read all 5 .md files (01-05)
    - Check each checklist
    - Identify gaps or inconsistencies
    - Suggest improvements
@@ -384,30 +468,79 @@ Use provided classes for common patterns:
    - "Core message is 35 words, should be <20"
    - "Section 3 has 15 min but outline shows 8 min"
    - "No backup plan for demo in delivery notes"
+   - "05_talk.md missing transitions between sections"
 ```
 
-### Workflow 3: Slides from Outline
+### Workflow 3: Slides from Talk Script
 
 ```
-1. User: "Create slides for section 3"
+1. User: "Create slides based on the talk script"
    Claude:
-   - Read 03_outline.md for section 3
-   - Read 04_delivery.md for speaker notes
-   - Check time budget (e.g., 8 min = 4-5 slides)
+   - Read 05_talk.md as primary source
+   - Read 03_outline.md for section structure
+   - Read 04_delivery.md for pauses/emphasis
+   - Check time budget per section
    - Create slides using appropriate patterns
    - Use visual-first approach (quotes > bullets)
+   - One idea per slide from talk narrative
 ```
 
-### Workflow 4: Refine Slides
+### Workflow 4: Human Review & Iteration
 
 ```
-1. User: "Slide 7 has too much text"
+1. User: "Let's review the slides"
    Claude:
-   - Read current slide content
-   - Identify core message
-   - Suggest splitting into 2 slides OR
-   - Rewrite as big-quote format OR
-   - Use comparison layout
+   - Read slides/index.html
+   - Be prepared for multiple iterations
+   - Common requests:
+     * "Reduce font size on slide X"
+     * "Move slide Y before slide Z"
+     * "Add fragment to line 3 on slide W"
+     * "Verify this quote attribution"
+     * "Remove slide Q"
+   - Make changes immediately
+   - Don't batch changes—apply one at a time
+```
+
+### Workflow 5: Retroaction (CRITICAL)
+
+```
+1. User: "Update planning docs to match final slides"
+   Claude:
+   - Read finalized slides/index.html
+   - Count total slides
+   - Identify all changes from original plan:
+     * Added/removed slides
+     * Modified quotes or attributions
+     * New content (e.g., P&L comparisons)
+     * Reordered sections
+     * Fragment additions
+
+2. Update each planning doc systematically:
+   - 01_identity.md: Update slide count
+   - 02_message_and_narrative.md:
+     * Add new evidence/examples
+     * Fix quote attributions
+     * Update supporting evidence
+   - 03_outline.md:
+     * Update slide ranges per section
+     * Add notes on fragments
+     * Remove deleted slides from outline
+     * Add any new sections
+   - 04_delivery.md:
+     * Update speaker notes for modified slides
+     * Fix quote pause notes
+     * Update backup plans if needed
+   - 05_talk.md:
+     * Align talk script with final slide messages
+     * Update quotes to match final versions
+     * Adjust timing if slide count changed significantly
+
+3. Validate coherence:
+   - Read through all 5 updated docs
+   - Check that slide count matches across 01, 03, 04
+   - Verify quotes are consistent across 02, 04, 05
+   - Ensure outline (03) reflects actual slide flow
 ```
 
 ## Troubleshooting
